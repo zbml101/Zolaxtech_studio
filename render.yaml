@@ -1,0 +1,18 @@
+# Render Blueprint: New > Blueprint, pick this repository, then paste the two values when asked.
+services:
+  - type: web
+    name: zolaxtech-studio
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: NODE_ENV
+        value: production
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false

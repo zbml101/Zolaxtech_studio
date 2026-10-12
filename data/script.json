@@ -1,0 +1,58 @@
+{
+ "parts": [
+  {
+   "id": "hook",
+   "title": "1. Hook",
+   "minutes": 1,
+   "hint": "Show the end result first and promise one clear outcome: 'In this video you will learn to ... by the end.'"
+  },
+  {
+   "id": "why",
+   "title": "2. Why it matters",
+   "minutes": 1,
+   "hint": "One real situation where the viewer needs this (work, school, daily life). Keep it short."
+  },
+  {
+   "id": "need",
+   "title": "3. What you need",
+   "minutes": 0.5,
+   "hint": "Requirements: device, account, files. Link practice files in the description."
+  },
+  {
+   "id": "step1",
+   "title": "4. Step-by-step part 1",
+   "minutes": 3,
+   "hint": "Smallest first skill. Say what you click before you click it, then do it slowly."
+  },
+  {
+   "id": "step2",
+   "title": "5. Step-by-step part 2",
+   "minutes": 3,
+   "hint": "Next skill. Show one common mistake and how to fix it."
+  },
+  {
+   "id": "step3",
+   "title": "6. Step-by-step part 3",
+   "minutes": 3,
+   "hint": "Final skill, combining the earlier ones."
+  },
+  {
+   "id": "challenge",
+   "title": "7. Mini challenge",
+   "minutes": 1,
+   "hint": "Give the viewer a small task to try alone and tell them to pause the video."
+  },
+  {
+   "id": "recap",
+   "title": "8. Recap",
+   "minutes": 1,
+   "hint": "Three bullet points of what they learned."
+  },
+  {
+   "id": "next",
+   "title": "9. Next episode and call to action",
+   "minutes": 1,
+   "hint": "Name the next video, ask one question to start comments, remind about subscribing and the playlist."
+  }
+ ]
+}

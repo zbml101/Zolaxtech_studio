@@ -1,0 +1,429 @@
+[
+ {
+  "series": "AI Tools",
+  "idea": "ChatGPT in Amharic: what works well and what does not (live tests)",
+  "format": "Long",
+  "priority": "High",
+  "why": ""
+ },
+ {
+  "series": "AI Tools",
+  "idea": "10 ways students can use ChatGPT to study without cheating",
+  "format": "Long",
+  "priority": "High",
+  "why": ""
+ },
+ {
+  "series": "AI Tools",
+  "idea": "NotebookLM: turn a PDF into a study guide, quiz and audio overview",
+  "format": "Long",
+  "priority": "High",
+  "why": ""
+ },
+ {
+  "series": "AI Tools",
+  "idea": "Write a CV and cover letter with AI and Google Docs",
+  "format": "Long",
+  "priority": "Medium",
+  "why": ""
+ },
+ {
+  "series": "AI Tools",
+  "idea": "How to check if an AI answer is wrong (fact-checking habits)",
+  "format": "Long",
+  "priority": "Medium",
+  "why": ""
+ },
+ {
+  "series": "AI Tools",
+  "idea": "5 copy-and-paste prompts for students (Short, cut from the Advanced ChatGPT video)",
+  "format": "Short",
+  "priority": "Medium",
+  "why": ""
+ },
+ {
+  "series": "Computer Basics",
+  "idea": "Why is my computer slow? 8 fixes anyone can try",
+  "format": "Long",
+  "priority": "High",
+  "why": ""
+ },
+ {
+  "series": "Computer Basics",
+  "idea": "20 keyboard shortcuts everybody should know",
+  "format": "Short",
+  "priority": "High",
+  "why": ""
+ },
+ {
+  "series": "Computer Basics",
+  "idea": "How to spot scam messages and fake websites",
+  "format": "Long",
+  "priority": "High",
+  "why": ""
+ },
+ {
+  "series": "Computer Basics",
+  "idea": "Backups explained: flash disk vs Google Drive",
+  "format": "Long",
+  "priority": "Medium",
+  "why": ""
+ },
+ {
+  "series": "Computer Basics",
+  "idea": "Wi-Fi not working? Simple checks before calling anyone",
+  "format": "Long",
+  "priority": "Medium",
+  "why": ""
+ },
+ {
+  "series": "Computer Basics",
+  "idea": "Printer, projector and scanner basics for the office",
+  "format": "Long",
+  "priority": "Low",
+  "why": ""
+ },
+ {
+  "series": "Google Workspace",
+  "idea": "Gmail tricks: scheduled send, undo send, filters",
+  "format": "Short",
+  "priority": "Medium",
+  "why": ""
+ },
+ {
+  "series": "Google Workspace",
+  "idea": "Time blocking with Google Calendar (use your own channel schedule as the example)",
+  "format": "Long",
+  "priority": "Medium",
+  "why": ""
+ },
+ {
+  "series": "Google Workspace",
+  "idea": "Budget tracker in Google Sheets from scratch",
+  "format": "Long",
+  "priority": "High",
+  "why": ""
+ },
+ {
+  "series": "Google Workspace",
+  "idea": "Docs: write a formal letter and a professional CV",
+  "format": "Long",
+  "priority": "High",
+  "why": ""
+ },
+ {
+  "series": "Google Workspace",
+  "idea": "Google Forms: build a quiz that grades itself",
+  "format": "Long",
+  "priority": "Medium",
+  "why": ""
+ },
+ {
+  "series": "Web Dev - HTML",
+  "idea": "Build your first web page in 20 minutes",
+  "format": "Long",
+  "priority": "High",
+  "why": ""
+ },
+ {
+  "series": "Web Dev - HTML",
+  "idea": "Digital business card page (HTML and CSS only)",
+  "format": "Long",
+  "priority": "Medium",
+  "why": ""
+ },
+ {
+  "series": "Web Dev - CSS",
+  "idea": "Make any page look good: 10 CSS tips",
+  "format": "Short",
+  "priority": "Medium",
+  "why": ""
+ },
+ {
+  "series": "Web Dev - JavaScript",
+  "idea": "Mini projects: calculator, quiz app, unit converter",
+  "format": "Long",
+  "priority": "High",
+  "why": ""
+ },
+ {
+  "series": "Web Dev - Later",
+  "idea": "PHP and MySQL: contact form, login system",
+  "format": "Long",
+  "priority": "Medium",
+  "why": ""
+ },
+ {
+  "series": "Web Dev - Later",
+  "idea": "React basics: components, props, state",
+  "format": "Long",
+  "priority": "Medium",
+  "why": ""
+ },
+ {
+  "series": "Web Dev - Later",
+  "idea": "Node.js and Express: build your first API",
+  "format": "Long",
+  "priority": "Medium",
+  "why": ""
+ },
+ {
+  "series": "Web Dev - Later",
+  "idea": "Deploy a site: GitHub Pages, hosting and a custom domain",
+  "format": "Long",
+  "priority": "Medium",
+  "why": ""
+ },
+ {
+  "series": "Web Dev - Later",
+  "idea": "Capstone series: build a full-stack IT helpdesk ticket app step by step",
+  "format": "Series",
+  "priority": "High",
+  "why": ""
+ },
+ {
+  "series": "Growth",
+  "idea": "Cut 1 or 2 Shorts (under 60 seconds) from every long video",
+  "format": "Short",
+  "priority": "High",
+  "why": ""
+ },
+ {
+  "series": "Growth",
+  "idea": "Telegram channel or group for students: post each video and practice files",
+  "format": "Community",
+  "priority": "High",
+  "why": ""
+ },
+ {
+  "series": "Growth",
+  "idea": "Community poll: which topic should come next?",
+  "format": "Community",
+  "priority": "Medium",
+  "why": ""
+ },
+ {
+  "series": "Growth",
+  "idea": "Playlist per series, named clearly, with a short trailer for each",
+  "format": "Setup",
+  "priority": "High",
+  "why": ""
+ },
+ {
+  "series": "Growth",
+  "idea": "Channel trailer: who the channel is for and what you teach (2 minutes)",
+  "format": "Long",
+  "priority": "Medium",
+  "why": ""
+ },
+ {
+  "series": "AI Tools",
+  "idea": "I tested ChatGPT in Amharic: 10 real tests and an honest score",
+  "format": "Long",
+  "priority": "High",
+  "why": "Curiosity plus local language: people want to know if it works for them"
+ },
+ {
+  "series": "AI Tools",
+  "idea": "ChatGPT vs Gemini vs Copilot in Amharic: which one is best? (same 5 tasks)",
+  "format": "Long",
+  "priority": "High",
+  "why": "Comparisons get searched and shared in groups"
+ },
+ {
+  "series": "AI Tools",
+  "idea": "Learn any skill in 30 days with free AI tools (full plan, step by step)",
+  "format": "Long",
+  "priority": "High",
+  "why": "Clear promise and a result the viewer can start today"
+ },
+ {
+  "series": "AI Tools",
+  "idea": "Make a CV that gets noticed with AI and Google Docs (free template included)",
+  "format": "Long",
+  "priority": "High",
+  "why": "Job seekers share useful templates"
+ },
+ {
+  "series": "AI Tools",
+  "idea": "Study for exams with NotebookLM: turn your notes into quizzes and an audio summary",
+  "format": "Long",
+  "priority": "High",
+  "why": "Students share study tricks with classmates"
+ },
+ {
+  "series": "AI Tools",
+  "idea": "5 free AI tools that can save you 10 hours a week",
+  "format": "Long",
+  "priority": "Medium",
+  "why": "List format is easy to click and easy to forward"
+ },
+ {
+  "series": "AI Tools",
+  "idea": "How to spot AI fake images, voices and scam messages",
+  "format": "Long",
+  "priority": "High",
+  "why": "Safety topic that people send to family and friends"
+ },
+ {
+  "series": "Computer Basics",
+  "idea": "Your computer is slow? Fix it in 10 minutes with no software",
+  "format": "Long",
+  "priority": "High",
+  "why": "Almost everyone has this problem and searches for it"
+ },
+ {
+  "series": "Computer Basics",
+  "idea": "How to recover deleted files for free (what works and what does not)",
+  "format": "Long",
+  "priority": "High",
+  "why": "Urgent problem, high search demand"
+ },
+ {
+  "series": "Computer Basics",
+  "idea": "What to check before buying a used laptop (IT support checklist)",
+  "format": "Long",
+  "priority": "High",
+  "why": "Your IT experience is the proof; viewers save and share checklists"
+ },
+ {
+  "series": "Computer Basics",
+  "idea": "10 computer mistakes beginners make and how to avoid them",
+  "format": "Long",
+  "priority": "High",
+  "why": "Mistakes-to-avoid titles get strong clicks"
+ },
+ {
+  "series": "Computer Basics",
+  "idea": "7 things I fix every week as an IT support specialist",
+  "format": "Long",
+  "priority": "High",
+  "why": "Real stories from work are hard for other channels to copy"
+ },
+ {
+  "series": "Computer Basics",
+  "idea": "How to protect your Telegram, Facebook and Gmail accounts from hackers",
+  "format": "Long",
+  "priority": "High",
+  "why": "Account safety matters to every user"
+ },
+ {
+  "series": "Computer Basics",
+  "idea": "Speed up an old laptop: 8 fixes that cost nothing",
+  "format": "Long",
+  "priority": "Medium",
+  "why": "Before and after results are very watchable"
+ },
+ {
+  "series": "Computer Basics",
+  "idea": "Transfer files from phone to PC in 5 ways, with and without internet",
+  "format": "Long",
+  "priority": "Medium",
+  "why": "Practical problem solved in one video"
+ },
+ {
+  "series": "Computer Basics",
+  "idea": "1 computer trick in 30 seconds (weekly Shorts series)",
+  "format": "Short",
+  "priority": "High",
+  "why": "Shorts bring new viewers who then find your long videos"
+ },
+ {
+  "series": "Google Workspace",
+  "idea": "Google Sheets tricks that save hours of work",
+  "format": "Long",
+  "priority": "Medium",
+  "why": "Office workers share time-saving tips"
+ },
+ {
+  "series": "Google Workspace",
+  "idea": "Make a free website with Google Sites in 30 minutes",
+  "format": "Long",
+  "priority": "Medium",
+  "why": "Free and fast; many small businesses want a web page"
+ },
+ {
+  "series": "Google Workspace",
+  "idea": "Free budget tracker for your salary in Google Sheets (template included)",
+  "format": "Long",
+  "priority": "High",
+  "why": "Everyone has a budget; templates get saved and shared"
+ },
+ {
+  "series": "Web Dev - HTML",
+  "idea": "Build a website in 1 hour from zero (HTML and CSS full project)",
+  "format": "Long",
+  "priority": "High",
+  "why": "A finished result in one sitting beats theory"
+ },
+ {
+  "series": "Web Dev - HTML",
+  "idea": "Web developer roadmap for Ethiopian beginners: 12 months with free resources",
+  "format": "Long",
+  "priority": "High",
+  "why": "Career videos are shared widely among students"
+ },
+ {
+  "series": "Web Dev - HTML",
+  "idea": "How I built zolaxtech.com.et: the full story and the tools",
+  "format": "Long",
+  "priority": "Medium",
+  "why": "Behind-the-scenes builds trust and shows the result is real"
+ },
+ {
+  "series": "Web Dev - Later",
+  "idea": "Coding or IT support: which career should you choose?",
+  "format": "Long",
+  "priority": "Medium",
+  "why": "Opinion and career topics start comments and shares"
+ },
+ {
+  "series": "Web Dev - Later",
+  "idea": "Build your first AI chatbot app with simple JavaScript",
+  "format": "Long",
+  "priority": "Medium",
+  "why": "AI plus coding is a strong mix of two interests"
+ },
+ {
+  "series": "Growth",
+  "idea": "Restarting my channel from zero: 30-day challenge with weekly updates",
+  "format": "Series",
+  "priority": "Medium",
+  "why": "A visible journey makes viewers want to follow along"
+ },
+ {
+  "series": "Growth",
+  "idea": "Ask me anything about computers: I answer your comments live (Q&A video)",
+  "format": "Long",
+  "priority": "Medium",
+  "why": "Viewers return when their own question is answered"
+ },
+ {
+  "series": "Growth",
+  "idea": "Before and after: rescuing a messy, slow PC from start to finish",
+  "format": "Long",
+  "priority": "Medium",
+  "why": "Transformations hold attention to the end"
+ },
+ {
+  "series": "Growth",
+  "idea": "Computer myths people still believe (and what is actually true)",
+  "format": "Long",
+  "priority": "Medium",
+  "why": "Surprise plus a debate in the comments"
+ },
+ {
+  "series": "Growth",
+  "idea": "Beginners' dictionary: 30 computer words explained in Amharic in simple language",
+  "format": "Long",
+  "priority": "High",
+  "why": "A reference video people come back to and recommend"
+ },
+ {
+  "series": "Growth",
+  "idea": "Free printable cheat sheet: 30 Windows shortcuts (download link in the description)",
+  "format": "Long",
+  "priority": "Medium",
+  "why": "A free download gives viewers a reason to share"
+ }
+]
