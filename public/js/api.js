@@ -6,7 +6,7 @@ export const setTokenProvider = (fn) => { tokenProvider = fn; };
 export const setSignedOutHandler = (fn) => { onSignedOut = fn; };
 
 export class ApiError extends Error {
-  constructor(message, status) { super(message); this.status = status; }
+  constructor(message, status, detail) { super(message); this.status = status; this.detail = detail; }
 }
 
 async function request(method, path, body, raw) {
@@ -28,7 +28,7 @@ async function request(method, path, body, raw) {
   if (raw && res.ok) return res;
   let data = null;
   try { data = await res.json(); } catch (_) { /* no body */ }
-  if (!res.ok) throw new ApiError((data && data.error) || 'Something went wrong. Try again in a moment.', res.status);
+  if (!res.ok) throw new ApiError((data && data.error) || 'Something went wrong. Try again in a moment.', res.status, data && data.detail);
   return data;
 }
 

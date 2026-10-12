@@ -13,7 +13,12 @@ try {
   }
 } catch (_) { /* no .env file: fine */ }
 
-const { createClient } = require('@supabase/supabase-js');
+const { createClient: baseCreateClient } = require('@supabase/supabase-js');
+const WebSocket = require('ws');
+
+// supabase-js wants a WebSocket for its realtime feature, which this app never uses. Node 20 has none built in,
+// so hand it one; otherwise creating a client fails with "native WebSocket not found".
+const createClient = (url, key, options = {}) => baseCreateClient(url, key, { ...options, realtime: { transport: WebSocket } });
 const { createApp } = require('./src/app');
 
 const config = {

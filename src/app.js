@@ -59,6 +59,28 @@ function createApp({ createClient, config, supabaseBrowserBundle, google: google
   api.get('/health', (req, res) => res.json({ ok: true, time: new Date().toISOString() }));
   // These two values are meant to be public: the browser needs them to sign in with Supabase.
   api.get('/config', (req, res) => res.json({ supabaseUrl: config.supabaseUrl, supabaseAnonKey: config.supabaseAnonKey, googleEnabled: google.enabled }));
+  // Open /api/diagnose in the browser to see, without signing in, whether the server is set up correctly.
+  api.get('/diagnose', async (req, res) => {
+    const out = { node: process.version, env: { SUPABASE_URL: Boolean(config.supabaseUrl), SUPABASE_ANON_KEY: Boolean(config.supabaseAnonKey), PUBLIC_URL: Boolean(config.publicUrl), google: google.enabled },
+      supabaseHost: null, supabaseReachable: null, tables: null, templates: Boolean(templates && templates.routine && templates.routine.tasks.length) };
+    try { out.supabaseHost = new URL(config.supabaseUrl).host; } catch (_) { out.supabaseHost = 'the SUPABASE_URL is not a valid address'; }
+    if (out.supabaseHost && config.supabaseAnonKey) {
+      const headers = { apikey: config.supabaseAnonKey, Authorization: `Bearer ${config.supabaseAnonKey}` };
+      try {
+        const r = await fetch(`${config.supabaseUrl}/auth/v1/health`, { headers });
+        out.supabaseReachable = r.ok ? 'yes' : `answered ${r.status} (check SUPABASE_ANON_KEY)`;
+      } catch (e) { out.supabaseReachable = `no: ${e.cause && e.cause.code ? e.cause.code : e.message}`; }
+      out.tables = {};
+      for (const t of ['settings', 'videos', 'ideas', 'todos', 'routine_done', 'reviews', 'google_connections']) {
+        try {
+          const r = await fetch(`${config.supabaseUrl}/rest/v1/${t}?select=*&limit=0`, { headers });
+          const body = await r.text();
+          out.tables[t] = r.ok || /permission denied|row-level/i.test(body) ? 'ok' : `missing or blocked (${r.status}): ${body.slice(0, 120)}`;
+        } catch (e) { out.tables[t] = `error: ${e.message}`; }
+      }
+    }
+    res.set('Cache-Control', 'no-store').json(out);
+  });
   api.get('/templates', (req, res) => {
     res.set('Cache-Control', 'public, max-age=300');
     res.json({ ...templates, stages: STAGES, ideaFormats: IDEA_FORMATS, priorities: PRIORITIES });
@@ -87,11 +109,12 @@ function createApp({ createClient, config, supabaseBrowserBundle, google: google
   // ---------------------------------------------------------------- errors
   // eslint-disable-next-line no-unused-vars
   app.use((err, req, res, next) => {
-    if (err instanceof HttpError) return res.status(err.status).json({ error: err.message });
+    const detail = (e) => (req.user && e && e.detail ? { detail: e.detail } : {});
+    if (err instanceof HttpError) return res.status(err.status).json({ error: err.message, ...detail(err) });
     if (err && err.type === 'entity.too.large') return res.status(413).json({ error: 'That is too much text to save at once.' });
     if (err instanceof SyntaxError && 'body' in err) return res.status(400).json({ error: 'The request was not valid JSON.' });
     console.error('[server] unexpected error:', err);
-    res.status(500).json({ error: 'Something went wrong on the server. Try again in a moment.' });
+    res.status(500).json({ error: 'Something went wrong on the server. Try again in a moment.', ...(req.user ? { detail: `${(err && err.name) || 'Error'}: ${String((err && err.message) || err).slice(0, 200)}` } : {}) });
   });
 
   return app;

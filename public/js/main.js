@@ -61,7 +61,7 @@ async function enter() {
   } catch (e) {
     clearTimeout(slow);
     if (e.status === 401) return;
-    mount(app, h('div', { class: 'boot' }, h('strong', null, 'Could not load your plan'), h('p', { class: 'muted' }, errorText(e)), e.status ? h('p', { class: 'muted small' }, `Error code ${e.status}`) : null,
+    mount(app, h('div', { class: 'boot' }, h('strong', null, 'Could not load your plan'), h('p', { class: 'muted' }, errorText(e)), e.status ? h('p', { class: 'muted small', style: { maxWidth: '520px', wordBreak: 'break-word' } }, `Error code ${e.status}${e.detail ? ` · ${e.detail}` : ''}`) : null,
       h('div', { class: 'row gap' }, h('button', { class: 'btn primary', onclick: () => { loading = false; enter(); } }, 'Try again'), h('button', { class: 'btn ghost', onclick: () => signOut() }, 'Sign out'))));
   } finally { loading = false; }
 }
