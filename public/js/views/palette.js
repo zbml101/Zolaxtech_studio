@@ -1,7 +1,8 @@
 // Ctrl+K / Cmd+K: jump anywhere or start something new.
 import { h } from '../lib/dom.js';
 import { icon } from '../lib/icons.js';
-import { state } from '../store.js';
+import { state, syncCalendar } from '../store.js';
+import { toast, errorText } from '../lib/ui.js';
 import { setTheme, currentTheme } from './settings.js';
 import { openNewVideo } from './pipeline.js';
 
@@ -14,6 +15,7 @@ export function openPalette() {
     ...PAGES.map(([r, label, ic]) => ({ group: 'Go to', label, ic, run: () => { location.hash = `#/${r}`; } })),
     { group: 'Actions', label: 'New video', ic: 'plus', run: () => openNewVideo() },
     { group: 'Actions', label: currentTheme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme', ic: currentTheme() === 'dark' ? 'sun' : 'moon', run: () => { setTheme(currentTheme() === 'dark' ? 'light' : 'dark'); } },
+    ...(state.google.connected ? [{ group: 'Actions', label: 'Sync schedule to Google Calendar', ic: 'calendar', run: async () => { try { const r = await syncCalendar(); toast(`Calendar updated: ${r.created} added, ${r.updated} changed, ${r.deleted} removed.`, 'success'); } catch (e) { toast(errorText(e), 'error'); } } }] : []),
     ...state.videos.map((v) => ({ group: 'Videos', label: `${v.position}. ${v.title}`, ic: 'play', run: () => { location.hash = `#/video/${v.id}`; } })),
   ];
   let query = '', sel = 0, shown = [];

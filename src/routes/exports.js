@@ -1,8 +1,7 @@
 const express = require('express');
 const { wrap, check } = require('../lib/http');
-const { planDates } = require('../lib/dates');
 const { buildCalendar } = require('../lib/ics');
-const { toCsv } = require('../lib/csv');
+const { videosCsv } = require('../lib/videos-csv');
 
 module.exports = function exportRoutes() {
   const router = express.Router();
@@ -28,23 +27,7 @@ module.exports = function exportRoutes() {
 
   router.get('/export/videos.csv', wrap(async (req, res) => {
     const { settings, videos } = await load(req);
-    const dates = (v) => planDates(settings, v.position);
-    const csv = toCsv(
-      [
-        { label: 'Week', value: (v) => v.position },
-        { label: 'Series', value: (v) => v.series },
-        { label: 'Title', value: (v) => v.title },
-        { label: 'Amharic title', value: (v) => v.title_am },
-        { label: 'Stage', value: (v) => v.stage },
-        { label: 'Script day', value: (v) => dates(v).script },
-        { label: 'Record day', value: (v) => dates(v).record },
-        { label: 'Edit day', value: (v) => dates(v).edit },
-        { label: 'Publish day', value: (v) => dates(v).publish },
-        { label: 'Views after 7 days', value: (v) => v.views_7d },
-        { label: 'Video link', value: (v) => v.video_url },
-      ],
-      videos,
-    );
+    const csv = videosCsv(settings, videos);
     res.set({
       'Content-Type': 'text/csv; charset=utf-8',
       'Content-Disposition': 'attachment; filename="zolaxtech-videos.csv"',

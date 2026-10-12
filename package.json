@@ -1,7 +1,7 @@
 {
   "name": "zolaxtech-studio",
   "version": "1.0.0",
-  "description": "ZolaxTech Studio: a production system for an Amharic educational YouTube channel (Supabase + Render)",
+  "description": "ZolaxTech Studio: a production system for an Amharic educational YouTube channel (Supabase + SnapDeploy)",
   "main": "server.js",
   "private": true,
   "engines": {
@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "test": "node test/run.js"
+    "test": "node test/run.js && node test/google.test.js"
   },
   "license": "UNLICENSED",
   "dependencies": {

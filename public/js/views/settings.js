@@ -3,7 +3,8 @@ import { icon } from '../lib/icons.js';
 import { field, toast, errorText } from '../lib/ui.js';
 import { PUBLISH_DAYS } from '../lib/constants.js';
 import { weekday, nice, addDays } from '../lib/dates.js';
-import { state, saveSettings } from '../store.js';
+import { state, saveSettings, connectGoogle, disconnectGoogle, syncCalendar, exportSheet } from '../store.js';
+import { confirmDialog } from '../lib/ui.js';
 import { download } from '../api.js';
 import { signOut } from '../auth.js';
 
@@ -13,6 +14,44 @@ export function setTheme(t) {
   try { localStorage.setItem('zx-theme', t); } catch (_) { /* fine */ }
   const meta = document.querySelector('meta[name=theme-color]');
   if (meta) meta.setAttribute('content', t === 'dark' ? '#0B1722' : '#F3F6F9');
+}
+
+let busy = null; // which Google action is running
+
+function googlePanel(rerender) {
+  const g = state.google;
+  const run = (key, fn, done) => async () => {
+    if (busy) return;
+    busy = key; rerender();
+    try { toast(await done(await fn()), 'success'); } catch (e) { toast(errorText(e), 'error'); }
+    busy = null; rerender();
+  };
+  const btn = (key, label, fn, done, primary) => h('button', { class: `btn${primary ? ' primary' : ''}`, disabled: Boolean(busy), onclick: run(key, fn, done) }, busy === key ? 'Working…' : label);
+  const when = g.lastSync ? new Date(g.lastSync).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' }) : null;
+  const row = (title, text, ...actions) => h('div', { class: 'rule' }, h('strong', null, title), h('span', { class: 'muted small' }, text), h('div', { class: 'row gap wrap', style: { marginTop: '6px' } }, actions));
+
+  if (!g.configured) {
+    return h('section', { class: 'panel stack' }, h('h2', null, 'Google Workspace'),
+      h('p', { class: 'muted small' }, 'Not set up on this server yet. Add GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET and TOKEN_KEY in the SnapDeploy environment variables to turn on Calendar, Docs and Sheets. The README has the steps.'));
+  }
+  if (!g.connected) {
+    return h('section', { class: 'panel stack' }, h('h2', null, 'Google Workspace'),
+      h('p', { class: 'muted small' }, 'Connect your Google account to put your schedule on Google Calendar, send scripts to Google Docs, and copy the video list to Google Sheets. The app can only see the calendar events and the files it creates itself.'),
+      h('div', null, h('button', { class: 'btn primary', onclick: () => connectGoogle().catch((e) => toast(errorText(e), 'error')) }, icon('external'), 'Connect Google')));
+  }
+  return h('section', { class: 'panel stack' },
+    h('div', { class: 'panel-h', style: { marginBottom: 0 } }, h('h2', null, 'Google Workspace'), h('span', { class: 'pill ok' }, g.email ? `Connected: ${g.email}` : 'Connected')),
+    row('Google Calendar', `Adds the script, record, edit and publish days of every unpublished video as all-day events, and keeps them in step when you move videos. ${when ? `Last synced ${when}.` : 'Not synced yet.'} Events you deleted in Google come back on the next sync.`,
+      btn('cal', when ? 'Sync again' : 'Sync to Google Calendar', syncCalendar, (r) => `Calendar updated: ${r.created} added, ${r.updated} changed, ${r.deleted} removed.`, true)),
+    row('Google Sheets', 'Copies the video list into a sheet in your Drive. Each export replaces the sheet with the latest plan, so keep your own notes on another tab.',
+      btn('sheet', g.sheetUrl ? 'Update Google Sheet' : 'Export to Google Sheets', exportSheet, () => 'Google Sheet is up to date.'),
+      g.sheetUrl ? h('a', { class: 'btn ghost', href: g.sheetUrl, target: '_blank', rel: 'noopener noreferrer' }, icon('external'), 'Open sheet') : null),
+    row('Google Docs', 'Open a video, go to its Script tab and choose Send to Google Docs. You get one document with English and Amharic side by side.',
+      g.folderUrl ? h('a', { class: 'btn ghost', href: g.folderUrl, target: '_blank', rel: 'noopener noreferrer' }, icon('external'), 'Open the Drive folder') : null),
+    h('div', null, h('button', { class: 'btn danger', disabled: Boolean(busy), onclick: async () => {
+      if (!(await confirmDialog({ title: 'Disconnect Google?', body: 'The app stops syncing. Events and files already in Google stay where they are.', confirm: 'Disconnect' }))) return;
+      try { await disconnectGoogle(); toast('Google disconnected.'); } catch (e) { toast(errorText(e), 'error'); }
+    } }, 'Disconnect Google')));
 }
 
 export function renderSettings(rerender) {
@@ -36,6 +75,7 @@ export function renderSettings(rerender) {
           h('option', { value: 'live', selected: st.recording_method === 'live' }, 'Live narration while recording the screen'),
           h('option', { value: 'voiceover', selected: st.recording_method === 'voiceover' }, 'Voice-over recorded after the screen'))),),
       h('div', { class: 'stack-l' },
+        googlePanel(rerender),
         h('section', { class: 'panel stack' }, h('h2', null, 'Appearance'),
           h('div', { class: 'seg-ctl', role: 'group', 'aria-label': 'Theme' },
             [['dark', 'Dark', 'moon'], ['light', 'Light', 'sun']].map(([t, label, ic]) => h('button', { class: currentTheme() === t ? 'on' : '', 'aria-pressed': currentTheme() === t ? 'true' : 'false', onclick: () => { setTheme(t); rerender(); } }, icon(ic), label)))),

@@ -9,15 +9,17 @@ const rateLimit = require('express-rate-limit');
 const { HttpError } = require('./lib/http');
 const { authMiddleware } = require('./auth');
 const { loadTemplates } = require('./seed');
+const { createGoogle } = require('./lib/google');
 const { STAGES, IDEA_FORMATS, PRIORITIES } = require('./constants');
 
-function createApp({ createClient, config, supabaseBrowserBundle }) {
+function createApp({ createClient, config, supabaseBrowserBundle, google: googleOptions = {} }) {
+  const google = createGoogle({ config: config.google || {}, fetchImpl: googleOptions.fetchImpl });
   const templates = loadTemplates();
   const app = express();
   const isProd = process.env.NODE_ENV === 'production';
 
   app.disable('x-powered-by');
-  app.set('trust proxy', 1); // Render puts a proxy in front of the app
+  app.set('trust proxy', 1); // the hosting platform puts a proxy in front of the app
 
   const connect = ["'self'", 'https://*.supabase.co', 'wss://*.supabase.co'];
   if (config.supabaseUrl) {
@@ -56,7 +58,7 @@ function createApp({ createClient, config, supabaseBrowserBundle }) {
 
   api.get('/health', (req, res) => res.json({ ok: true, time: new Date().toISOString() }));
   // These two values are meant to be public: the browser needs them to sign in with Supabase.
-  api.get('/config', (req, res) => res.json({ supabaseUrl: config.supabaseUrl, supabaseAnonKey: config.supabaseAnonKey }));
+  api.get('/config', (req, res) => res.json({ supabaseUrl: config.supabaseUrl, supabaseAnonKey: config.supabaseAnonKey, googleEnabled: google.enabled }));
   api.get('/templates', (req, res) => {
     res.set('Cache-Control', 'public, max-age=300');
     res.json({ ...templates, stages: STAGES, ideaFormats: IDEA_FORMATS, priorities: PRIORITIES });
@@ -67,6 +69,7 @@ function createApp({ createClient, config, supabaseBrowserBundle }) {
   api.use(require('./routes/videos')());
   api.use(require('./routes/data')({ templates }));
   api.use(require('./routes/exports')());
+  api.use(require('./routes/google')({ google, templates, config }));
   api.use((req, res) => res.status(404).json({ error: 'That address does not exist.' }));
   app.use('/api', api);
 

@@ -1,9 +1,9 @@
-import { h, mount } from './lib/dom.js';
+import { h, mount, reducedMotion } from './lib/dom.js';
 import { icon } from './lib/icons.js';
 import { toast, errorText } from './lib/ui.js';
 import { initAuth, getSession, onAuth, isRecovering, accessToken, signOut } from './auth.js';
 import { setTokenProvider, setSignedOutHandler } from './api.js';
-import { state, subscribe, load, reset, isOverdue } from './store.js';
+import { state, subscribe, load, reset, isOverdue, finishGoogleConnect } from './store.js';
 import { renderAuth } from './views/auth.js';
 import { renderDashboard } from './views/dashboard.js';
 import { renderToday } from './views/today.js';
@@ -23,6 +23,22 @@ const TABBAR = ['', 'today', 'pipeline', 'ideas', 'settings'];
 let shell = null;      // { content, side, tabbar, top }
 let baseRoute = '';    // the screen behind the video panel
 let loading = false;
+let lastKey = null;
+const shown = new Map(); // last number shown for each counter
+
+// Google sends the person back to /google/callback with a one-time code. Keep it, tidy the address bar, and finish once signed in.
+let pendingGoogle = null;
+if (location.pathname === '/google/callback') {
+  pendingGoogle = Object.fromEntries(new URLSearchParams(location.search));
+  history.replaceState(null, '', '/#/settings');
+}
+
+async function finishGoogle() {
+  const cb = pendingGoogle; pendingGoogle = null;
+  if (!cb) return;
+  if (cb.error || !cb.code) { toast('The Google connection was cancelled. Nothing was changed.', 'info'); return; }
+  try { const r = await finishGoogleConnect(cb.code, cb.state); toast(`Google connected${r.email ? ' as ' + r.email : ''}.`, 'success'); } catch (e) { toast(errorText(e), 'error'); }
+}
 
 // ---------------------------------------------------------------- boot
 function bootScreen(text, sub) {
@@ -41,10 +57,11 @@ async function enter() {
     clearTimeout(slow);
     buildShell();
     route();
+    await finishGoogle();
   } catch (e) {
     clearTimeout(slow);
     if (e.status === 401) return;
-    mount(app, h('div', { class: 'boot' }, h('strong', null, 'Could not load your plan'), h('p', { class: 'muted' }, errorText(e)),
+    mount(app, h('div', { class: 'boot' }, h('strong', null, 'Could not load your plan'), h('p', { class: 'muted' }, errorText(e)), e.status ? h('p', { class: 'muted small' }, `Error code ${e.status}`) : null,
       h('div', { class: 'row gap' }, h('button', { class: 'btn primary', onclick: () => { loading = false; enter(); } }, 'Try again'), h('button', { class: 'btn ghost', onclick: () => signOut() }, 'Sign out'))));
   } finally { loading = false; }
 }
@@ -97,10 +114,15 @@ function renderContent(focus) {
   const screen = name === 'video' ? baseRoute : name;
   const rerender = () => window.__rerender();
   const y = window.scrollY;
+  const key = `${screen}/${screen === 'today' ? a || '' : ''}`;
+  const entering = key !== lastKey || !shell.content.childElementCount;
+  lastKey = key;
   let view;
   try {
     view = { '': renderDashboard, today: () => renderToday(screen === 'today' && name !== 'video' ? a : undefined, rerender), pipeline: renderPipeline, ideas: renderIdeas, playbook: renderPlaybook, review: renderReview, settings: () => renderSettings(rerender) }[screen] || renderDashboard;
     mount(shell.content, view());
+    if (entering) { shell.content.classList.add('enter'); clearTimeout(shell.enterTimer); shell.enterTimer = setTimeout(() => shell.content.classList.remove('enter'), 1500); }
+    countUps(entering);
   } catch (e) {
     console.error(e);
     mount(shell.content, h('div', { class: 'empty' }, h('strong', null, 'This screen could not be drawn'), h('p', { class: 'muted' }, 'Reload the page. If it keeps happening, your data is safe; it is only the display.')));
@@ -118,6 +140,37 @@ function renderContent(focus) {
     if (again) { const pos = focus.selectionStart; again.focus(); try { again.setSelectionRange(pos, pos); } catch (_) { /* not a text field */ } }
   }
 }
+// Numbers count up when a screen opens, and from their old value when they change.
+function countUps(entering) {
+  shell.content.querySelectorAll('[data-count]').forEach((el) => {
+    const to = Number(el.dataset.count), k = el.dataset.key;
+    const from = !entering && shown.has(k) ? shown.get(k) : 0;
+    shown.set(k, to);
+    if (from === to || reducedMotion()) return;
+    const t0 = performance.now(), dur = 900;
+    el.textContent = from.toLocaleString();
+    (function step(now) {
+      const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(from + (to - from) * e).toLocaleString();
+      if (p < 1 && el.isConnected) requestAnimationFrame(step);
+    })(t0);
+  });
+}
+
+// A soft light follows the pointer across panels, cards and days.
+let spot = 0;
+document.addEventListener('pointermove', (e) => {
+  if (spot) return;
+  spot = requestAnimationFrame(() => {
+    spot = 0;
+    const el = e.target.closest && e.target.closest('.panel, .vcard, .day');
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    el.style.setProperty('--my', `${e.clientY - r.top}px`);
+  });
+}, { passive: true });
+
 window.__rerender = (focus) => renderContent(focus);
 
 function route() {

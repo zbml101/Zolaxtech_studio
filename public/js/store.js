@@ -17,6 +17,7 @@ export const state = {
   templates: null,
   scripts: new Map(), // id -> full video row (with script), loaded when a video is opened
   today: todayISO(),
+  google: { configured: false, connected: false }, // Google Workspace link, loaded with the rest
 };
 
 const subs = new Set();
@@ -44,6 +45,7 @@ export async function load() {
     data = await api.get('/state');
   }
   apply(data);
+  await loadGoogle();
   state.ready = true;
   emit();
 }
@@ -226,3 +228,43 @@ export async function saveSettings(patch) {
 
 export const weekStartOf = (iso) => sundayOf(iso);
 export const dayKeyOf = (iso) => DAY_KEYS[weekday(iso)];
+
+// ---------------------------------------------------------------- Google Workspace
+export async function loadGoogle() {
+  try { state.google = await api.get('/google/status'); } catch (e) {
+    state.google = { configured: e.status !== 503 ? state.google.configured : false, connected: false };
+    if (e.status === 503) state.google.configured = false;
+  }
+  emit();
+}
+
+export async function connectGoogle() {
+  const { url } = await api.post('/google/auth-url');
+  location.href = url;
+}
+export async function finishGoogleConnect(code, stateParam) {
+  const r = await api.post('/google/connect', { code, state: stateParam });
+  await loadGoogle();
+  return r;
+}
+export async function disconnectGoogle() {
+  await api.del('/google/connection');
+  await loadGoogle();
+}
+export async function syncCalendar() {
+  const r = await api.post('/google/calendar/sync');
+  await loadGoogle();
+  return r;
+}
+export async function exportSheet() {
+  const r = await api.post('/google/sheets/export');
+  await loadGoogle();
+  return r;
+}
+export async function sendScriptToDocs(id, replace = false) {
+  const r = await api.post(`/google/docs/script/${id}`, { replace });
+  const v = videoById(id);
+  if (v) v.doc_url = r.url;
+  emit();
+  return r;
+}

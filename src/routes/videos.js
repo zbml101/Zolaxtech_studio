@@ -3,8 +3,7 @@ const { wrap, check, HttpError } = require('../lib/http');
 const v = require('../lib/validate');
 const { STAGES } = require('../constants');
 
-const LIST_COLUMNS =
-  'id,position,series,title,title_am,key_points,stage,checklist,views_7d,video_url,notes,published_at,updated_at';
+const { videoColumns } = require('../lib/columns');
 
 function scriptValue(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) v.bad('The script must be an object of sections.');
@@ -91,7 +90,7 @@ module.exports = function videoRoutes() {
       patch.published_at = patch.stage === 'published' ? current.published_at || new Date().toISOString() : null;
     }
 
-    const columns = patch.script !== undefined ? '*' : LIST_COLUMNS;
+    const columns = patch.script !== undefined ? '*' : videoColumns();
     const row = check(await req.db.from('videos').update(patch).eq('id', id).select(columns).single(), 'update video');
     res.json(row);
   }));

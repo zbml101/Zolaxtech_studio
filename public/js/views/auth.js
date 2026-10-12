@@ -3,6 +3,29 @@ import { icon } from '../lib/icons.js';
 import { field } from '../lib/ui.js';
 import * as auth from '../auth.js';
 
+function timeline() {
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const tc = h('span', { class: 'tc' }, '00:00:00:00');
+  const t0 = performance.now();
+  (function tick(now) {
+    if (!tc.isConnected && now - t0 > 500) return;
+    const t = ((now - t0) / 1000) % 8;
+    tc.textContent = `00:00:${String(Math.floor(t)).padStart(2, '0')}:${String(Math.floor((t % 1) * 30)).padStart(2, '0')}`;
+    requestAnimationFrame(tick);
+  })(t0);
+  const clip = (col, label, color, p, span = 1) => h('div', { class: 'clip', style: { gridColumn: `${col + 1} / span ${span}`, '--c': color, '--p': p } }, label);
+  const track = (name, ...kids) => h('div', { class: 'tl-track' }, h('b', null, name), ...kids);
+  return h('div', { class: 'tl', 'aria-hidden': 'true' },
+    h('div', { class: 'tl-top' }, h('span', { class: 'rec' }, h('i'), 'REC'), tc, h('span', null, 'Week 1')),
+    h('div', { class: 'tl-ruler' }, h('span'), days.map((d) => h('span', null, d))),
+    track('SCRIPT', clip(1, 'Write', 'var(--s-ai)', 0)),
+    track('RECORD', clip(3, 'Record', 'var(--s-pc)', 2 / 7)),
+    track('VOICE', h('div', { class: 'wave', style: { gridColumn: '4 / span 2' } }, Array.from({ length: 22 }, (_, k) => h('i', { style: { '--k': k } })))),
+    track('EDIT', clip(5, 'Edit', 'var(--s-web)', 4 / 7)),
+    track('PUBLISH', clip(7, 'Publish', 'var(--s-com)', 6 / 7)),
+    h('div', { class: 'playhead' }));
+}
+
 export function renderAuth(root, { mode = 'signin', notice } = {}) {
   let current = mode;
   let msg = notice ? { kind: 'err', text: notice } : null;
@@ -50,9 +73,7 @@ export function renderAuth(root, { mode = 'signin', notice } = {}) {
         h('div', null,
           h('h1', null, 'One video a week, every week.'),
           h('p', { class: 'am', lang: 'am' }, 'በየሳምንቱ አንድ ቪዲዮ፣ በቋሚነት።')),
-        h('div', { class: 'week-demo', 'aria-hidden': 'true' },
-          [['Sun', 'Script'], ['Mon', 'Read'], ['Tue', 'Record'], ['Wed', 'Rest'], ['Thu', 'Edit'], ['Fri', 'Plan'], ['Sat', 'Publish']].map(([d, r]) =>
-            h('div', { class: `day${d === 'Tue' ? ' today' : ''}${d === 'Wed' ? ' off' : ''}` }, h('span', { class: 'dow' }, d), h('span', { class: 'role' }, r))))),
+        timeline()),
       h('section', { class: 'auth-form' },
         h('form', { class: 'auth-card', onsubmit: submit, novalidate: true },
           h('h2', null, titles[current]),

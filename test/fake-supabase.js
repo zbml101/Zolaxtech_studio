@@ -5,10 +5,10 @@ const crypto = require('crypto');
 const { weekday } = require('../src/lib/dates');
 
 const STAGES = ['planned', 'scripted', 'recorded', 'edited', 'thumbnail', 'scheduled', 'published'];
-const PRIMARY = { settings: ['user_id'], routine_done: ['user_id', 'week_start', 'task_key'], reviews: ['user_id', 'block'] };
+const PRIMARY = { settings: ['user_id'], google_connections: ['user_id'], routine_done: ['user_id', 'week_start', 'task_key'], reviews: ['user_id', 'block'] };
 
 function createFake() {
-  const tables = { settings: [], videos: [], ideas: [], todos: [], routine_done: [], reviews: [] };
+  const tables = { settings: [], videos: [], ideas: [], todos: [], routine_done: [], reviews: [], google_connections: [] };
   let tick = 0;
   const stamp = () => new Date(Date.now() + tick++).toISOString();
   const clone = (x) => JSON.parse(JSON.stringify(x));
@@ -19,6 +19,7 @@ function createFake() {
     ideas: () => ({ id: crypto.randomUUID(), series: 'General', format: 'Long', priority: 'Medium', why: '', used: false, video_id: null, created_at: stamp() }),
     todos: () => ({ id: crypto.randomUUID(), due_date: null, done: false, done_at: null, video_id: null, tag: '', created_at: stamp() }),
     routine_done: () => ({ done_at: stamp() }),
+    google_connections: () => ({ google_email: '', folder_id: null, calendar_synced_at: null, created_at: stamp() }),
     reviews: () => ({ worked: '', change_next: '', updated_at: stamp() }),
   };
 

@@ -4,9 +4,7 @@ const { wrap, check } = require('../lib/http');
 const { nextTuesday, addDays } = require('../lib/dates');
 const { loadSeed } = require('../seed');
 
-// The script text is big, so the list leaves it out. It is loaded when a video is opened.
-const VIDEO_LIST_COLUMNS =
-  'id,position,series,title,title_am,key_points,stage,checklist,views_7d,video_url,notes,published_at,updated_at';
+const { videoColumns, setDocColumn, isMissingColumn } = require('../lib/columns');
 
 const today = () => new Date().toISOString().slice(0, 10);
 
@@ -16,9 +14,14 @@ module.exports = function stateRoutes() {
 
   router.get('/state', wrap(async (req, res) => {
     const since = addDays(today(), -35);
+    const listVideos = async () => {
+      let r = await req.db.from('videos').select(videoColumns()).order('position', { ascending: true });
+      if (isMissingColumn(r.error)) { setDocColumn(false); r = await req.db.from('videos').select(videoColumns()).order('position', { ascending: true }); } else if (!r.error) setDocColumn(true);
+      return r;
+    };
     const [settings, videos, ideas, todos, routine, reviews] = await Promise.all([
       req.db.from('settings').select('*').maybeSingle(),
-      req.db.from('videos').select(VIDEO_LIST_COLUMNS).order('position', { ascending: true }),
+      listVideos(),
       req.db.from('ideas').select('*').order('created_at', { ascending: false }),
       req.db.from('todos').select('*').order('created_at', { ascending: false }),
       req.db.from('routine_done').select('week_start,task_key').gte('week_start', since).limit(1000),

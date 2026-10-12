@@ -5,7 +5,7 @@ import { confirmDialog, field, seriesTag, toast, errorText } from '../lib/ui.js'
 import { seriesColor } from '../lib/constants.js';
 import { words, speakMinutes, sum } from '../lib/format.js';
 import { nice, niceLong } from '../lib/dates.js';
-import { state, videoById, datesOf, patchVideo, loadFullVideo, deleteVideo, moveVideo, setStage, isOverdue } from '../store.js';
+import { state, videoById, datesOf, patchVideo, loadFullVideo, deleteVideo, moveVideo, setStage, isOverdue, sendScriptToDocs } from '../store.js';
 import { stageBar } from './shared.js';
 import { milestones } from './dashboard.js';
 import { openTeleprompter } from './teleprompter.js';
@@ -128,12 +128,34 @@ export async function openDrawer(id, tab = 'overview', onClose) {
         h('p', { class: 'hint' }, p.hint),
         h('div', { class: 'script-cols' }, area('en', 'English'), area('am', 'Amharic')));
     };
+    const docsBtn = () => {
+      const g = state.google;
+      if (!g.configured) return null;
+      const v = videoById(id);
+      const send = async (replace) => {
+        if (!g.connected) { toast('Connect Google first.', 'info', { label: 'Open settings', run: () => { closeDrawer(); location.hash = '#/settings'; } }); return; }
+        if (replace && !(await confirmDialog({ title: 'Update the Google Doc?', body: 'The document text is replaced with this script. Changes you made inside Google Docs are lost.', confirm: 'Update document', danger: false }))) return;
+        saveScript.cancel();
+        try {
+          setSave('Sending…');
+          await queueSave({ script });
+          const r = await sendScriptToDocs(id, replace);
+          setSave('Saved');
+          toast(replace ? 'Google Doc updated.' : 'Sent to Google Docs.', 'success', { label: 'Open', run: () => window.open(r.url, '_blank', 'noopener') });
+          drawBody();
+        } catch (e) { setSave(errorText(e), true); toast(errorText(e), 'error'); }
+      };
+      return v.doc_url
+        ? [h('a', { class: 'btn sm', href: v.doc_url, target: '_blank', rel: 'noopener noreferrer' }, icon('external'), 'Open Google Doc'), h('button', { class: 'btn sm', onclick: () => send(true) }, 'Update Google Doc')]
+        : h('button', { class: 'btn sm', onclick: () => send(false) }, icon('external'), 'Send to Google Docs');
+    };
     const el = h('div', { class: 'stack-l' },
       h('div', { class: 'panel flat row between wrap gap' },
         h('div', { class: 'row gap-l wrap small' }, h('span', null, 'English ', totalEn), h('span', null, 'Amharic ', totalAm), h('span', null, 'Speaking time ', est, h('span', { class: 'muted' }, ` of about ${target} min`))),
         h('div', { class: 'row gap-s wrap' },
           h('button', { class: 'btn sm', onclick: () => copyAll('en') }, icon('copy'), 'Copy English'),
           h('button', { class: 'btn sm', onclick: () => copyAll('am') }, icon('copy'), 'Copy Amharic'),
+          docsBtn(),
           h('button', { class: 'btn primary sm', onclick: () => { saveScript.flush && saveScript.cancel(); queueSave({ script }); openTeleprompter({ title: videoById(id).title, parts, script }); } }, icon('play'), 'Teleprompter'))),
       parts.map(partEl));
     recount();

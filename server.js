@@ -1,8 +1,8 @@
-// Starts the server. On Render, set SUPABASE_URL and SUPABASE_ANON_KEY as environment variables.
+// Starts the server. On SnapDeploy, set SUPABASE_URL and SUPABASE_ANON_KEY as environment variables.
 const fs = require('fs');
 const path = require('path');
 
-// Tiny .env reader for local use (Render uses real environment variables instead).
+// Tiny .env reader for local use (SnapDeploy uses real environment variables instead).
 try {
   const file = fs.readFileSync(path.join(__dirname, '.env'), 'utf8');
   for (const line of file.split(/\r?\n/)) {
@@ -19,13 +19,20 @@ const { createApp } = require('./src/app');
 const config = {
   supabaseUrl: (process.env.SUPABASE_URL || '').trim(),
   supabaseAnonKey: (process.env.SUPABASE_ANON_KEY || '').trim(),
+  publicUrl: (process.env.PUBLIC_URL || '').trim(),
+  // Optional: Google Workspace connection. Without these three the app works the same, minus the Google buttons.
+  google: {
+    clientId: (process.env.GOOGLE_CLIENT_ID || '').trim(),
+    clientSecret: (process.env.GOOGLE_CLIENT_SECRET || '').trim(),
+    tokenKey: (process.env.TOKEN_KEY || '').trim(),
+  },
 };
 
 if (!/^https:\/\/.+\.supabase\.co\/?$/.test(config.supabaseUrl) || !config.supabaseAnonKey) {
   console.error(
     '\nMissing Supabase settings.\n' +
     'Set SUPABASE_URL (like https://abcdxyz.supabase.co) and SUPABASE_ANON_KEY (the "anon public" key)\n' +
-    'in the Render dashboard (Environment) or in a local .env file. See README.md.\n',
+    'in the SnapDeploy dashboard (environment variables) or in a local .env file. See README.md.\n',
   );
   process.exit(1);
 }

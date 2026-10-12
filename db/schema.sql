@@ -4,7 +4,7 @@
 -- It is safe to run more than once.
 --
 -- Every table has a user_id column and row-level security, so each signed-in user
--- can only ever read or change their own rows. The Render server never needs the
+-- can only ever read or change their own rows. The hosted server never needs the
 -- secret "service_role" key: it talks to the database with the signed-in user's own token.
 
 -- ---------------------------------------------------------------- helpers
@@ -222,3 +222,24 @@ revoke all on function public.reorder_videos(uuid[]) from public, anon;
 grant execute on function public.add_video_at(int, text, text, text) to authenticated;
 grant execute on function public.delete_video(uuid) to authenticated;
 grant execute on function public.reorder_videos(uuid[]) to authenticated;
+
+-- ---------------------------------------------------------------- Google Workspace connection (added after the first release; safe to run again)
+alter table public.settings add column if not exists google_sheet_id text check (google_sheet_id is null or char_length(google_sheet_id) <= 200);
+alter table public.videos   add column if not exists doc_id  text check (doc_id  is null or char_length(doc_id)  <= 200);
+alter table public.videos   add column if not exists doc_url text check (doc_url is null or char_length(doc_url) <= 400);
+
+-- The refresh token is stored encrypted by the server (AES-256-GCM, key kept in the server's environment variables),
+-- so reading this table from the browser reveals nothing usable.
+create table if not exists public.google_connections (
+  user_id             uuid primary key default auth.uid() references auth.users (id) on delete cascade,
+  refresh_token_enc   text not null,
+  google_email        text not null default '',
+  folder_id           text,
+  calendar_synced_at  timestamptz,
+  created_at          timestamptz not null default now()
+);
+alter table public.google_connections enable row level security;
+drop policy if exists "own rows" on public.google_connections;
+create policy "own rows" on public.google_connections for all to authenticated using (user_id = auth.uid()) with check (user_id = auth.uid());
+revoke all on public.google_connections from anon;
+grant select, insert, update, delete on public.google_connections to authenticated;
