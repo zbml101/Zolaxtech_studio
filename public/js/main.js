@@ -61,6 +61,11 @@ async function enter() {
   } catch (e) {
     clearTimeout(slow);
     if (e.status === 401) return;
+    if (e.status === 403) {
+      mount(app, h('div', { class: 'boot' }, h('strong', null, 'This account is not approved'), h('p', { class: 'muted', style: { maxWidth: '420px' } }, errorText(e)),
+        h('button', { class: 'btn primary', onclick: () => signOut() }, 'Sign out')));
+      return;
+    }
     mount(app, h('div', { class: 'boot' }, h('strong', null, 'Could not load your plan'), h('p', { class: 'muted' }, errorText(e)), e.status ? h('p', { class: 'muted small', style: { maxWidth: '520px', wordBreak: 'break-word' } }, `Error code ${e.status}${e.detail ? ` · ${e.detail}` : ''}`) : null,
       h('div', { class: 'row gap' }, h('button', { class: 'btn primary', onclick: () => { loading = false; enter(); } }, 'Try again'), h('button', { class: 'btn ghost', onclick: () => signOut() }, 'Sign out'))));
   } finally { loading = false; }

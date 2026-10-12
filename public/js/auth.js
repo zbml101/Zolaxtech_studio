@@ -1,6 +1,9 @@
 // Sign-in with Supabase (email and password). The Supabase URL and public key come from the server.
 import { publicGet } from './api.js';
 
+// Read before the Supabase library tidies the address bar: links from reset and invite emails carry type=recovery or type=invite.
+const openedFromEmailLink = /type=(recovery|invite)/.test(location.hash + location.search);
+let restricted = false;
 let client = null;
 let session = null;
 let recovering = false;
@@ -8,18 +11,20 @@ const listeners = new Set();
 
 export const getSession = () => session;
 export const isRecovering = () => recovering;
+export const isRestricted = () => restricted;
 export const onAuth = (fn) => { listeners.add(fn); return () => listeners.delete(fn); };
 const notify = (event) => listeners.forEach((fn) => fn(event, session));
 
 export async function initAuth() {
   const cfg = await publicGet('/config');
+  restricted = Boolean(cfg.restricted);
   if (!window.supabase) throw new Error('The sign-in library did not load.');
   client = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey, {
     auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
   });
   const { data } = await client.auth.getSession();
   session = data.session;
-  recovering = /type=recovery/.test(location.hash) || /type=recovery/.test(location.search);
+  recovering = openedFromEmailLink;
   client.auth.onAuthStateChange((event, next) => {
     session = next;
     if (event === 'PASSWORD_RECOVERY') recovering = true;

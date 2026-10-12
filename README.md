@@ -14,9 +14,9 @@ It is the web version of the Excel planner and starts with the same 41 videos, 6
 3. Open **Project Settings > API** and copy two values:
    - **Project URL** (looks like `https://abcdxyz.supabase.co`)
    - **anon public** key (newer dashboards call it the **publishable** key). Do **not** use the `service_role` / secret key. This app never needs it.
-4. Open **Authentication > Providers > Email**. For a one-person app you can turn **Confirm email** off, so you can sign in right after creating the account. If you leave it on, the app shows "Check your email" and you open the link first.
+4. Open **Authentication > Providers > Email** and keep **Confirm email** turned **on**. After creating an account you open the link Supabase emails you, then sign in.
 5. After SnapDeploy gives you your address (step 2 below), open **Authentication > URL Configuration**. Set **Site URL** to your SnapDeploy address, and add it to **Redirect URLs**. Password-reset and confirmation emails use this.
-6. Optional but recommended once your own account exists: turn off **Allow new users to sign up** (Authentication > Sign In / Providers) so nobody else can register.
+6. Keep **Confirm email** turned **on** (see step 4), because the approved-people check relies on confirmed addresses. See **Who can sign in** below for adding people.
 
 ## 2. Deploy on SnapDeploy
 
@@ -24,11 +24,22 @@ It is the web version of the Excel planner and starts with the same 41 videos, 6
 2. In SnapDeploy, create a new container from that GitHub repository. No Dockerfile is needed: it detects Node and Express, runs `npm install`, and starts the app with `npm start`. `.nvmrc` picks Node 20.
 3. Add these **environment variables** in the container settings (do not set `PORT`; SnapDeploy sets it and the app reads it):
    - `SUPABASE_URL` and `SUPABASE_ANON_KEY` from step 1.
+   - `ALLOWED_EMAILS`: the email addresses allowed to use the app, separated by commas, for example `you@gmail.com,editor@gmail.com`. The app will not start without it.
    - `PUBLIC_URL` set to your container address, for example `https://your-name.containers.snapdeploy.app` (or your own domain). This makes sign-in links and the Google redirect address come out right.
 4. Deploy. SnapDeploy checks `/api/health`, which the app answers. Open the address, create your account, and your plan is created automatically. The first Tuesday on or after today becomes week 1; change it in **Settings**.
 5. Optional: add your own domain under the container's Domains section (free SSL). Then use that address for `PUBLIC_URL`, the Supabase Site URL and the Google redirect.
 
 Free plans have limits that change over time, so check SnapDeploy's and Supabase's current pages. At the time of writing, a free SnapDeploy container sleeps after about 15 minutes without visitors and takes about a minute to wake (the app shows a "Waking up the server" message), the free plan has a monthly hours limit and a daily deploy limit, and a free Supabase project can pause after a long period of no use; you restore it from the dashboard. Always-on hosting is a paid option.
+
+### Who can sign in
+
+This is a private studio. The server checks every request: an account gets in only if its email is in `ALLOWED_EMAILS` **and** the email has been confirmed. Anyone else who signs up sees "This account is not approved" and can read or change nothing. The email check is not case sensitive.
+
+- **Add a person:** add their email to `ALLOWED_EMAILS` in SnapDeploy and redeploy (or restart). They then either create an account on the sign-in page and confirm their email, or you invite them in Supabase under **Authentication > Users > Invite user**; they open the link and choose a password.
+- **Remove a person:** take their email out of `ALLOWED_EMAILS` and restart. Their data stays in the database until you delete the user in Supabase.
+- **Recommended extra lock:** in Supabase, **Authentication > Sign In / Providers**, turn off **Allow new users to sign up**, and add people only with **Invite user**. Strangers then cannot even create an account.
+- Each approved person sees only their own plan, scripts and ideas. People do not share data.
+- For local trials only, `ALLOW_ANY_SIGNED_IN=true` lets any account in. Never set it on the hosted app.
 
 ## 3. Connect Google Workspace (optional, about 10 minutes)
 

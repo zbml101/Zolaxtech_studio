@@ -26,6 +26,15 @@ function authMiddleware({ createClient, config }) {
         cache.set(token, entry);
       }
 
+      // Closed access: only approved, email-confirmed accounts get in, however they signed up.
+      const allowed = config.allowedEmails;
+      if (allowed && allowed.length) {
+        const email = String(entry.user.email || '').toLowerCase();
+        if (!allowed.includes(email) || !entry.user.email_confirmed_at) {
+          throw new HttpError(403, 'This account is not approved to use ZolaxTech Studio. Ask the owner to add your email address.');
+        }
+      }
+
       req.user = entry.user;
       req.db = createClient(config.supabaseUrl, config.supabaseAnonKey, clientOptions({ Authorization: `Bearer ${token}` }));
       next();

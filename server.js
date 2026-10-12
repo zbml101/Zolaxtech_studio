@@ -25,6 +25,8 @@ const config = {
   supabaseUrl: (process.env.SUPABASE_URL || '').trim(),
   supabaseAnonKey: (process.env.SUPABASE_ANON_KEY || '').trim(),
   publicUrl: (process.env.PUBLIC_URL || '').trim(),
+  // Only these people may use the app (comma-separated emails). Anyone else who signs up is turned away.
+  allowedEmails: (process.env.ALLOWED_EMAILS || '').split(/[,;\s]+/).map((e) => e.trim().toLowerCase()).filter(Boolean),
   // Optional: Google Workspace connection. Without these three the app works the same, minus the Google buttons.
   google: {
     clientId: (process.env.GOOGLE_CLIENT_ID || '').trim(),
@@ -42,6 +44,16 @@ if (!/^https:\/\/.+\.supabase\.co\/?$/.test(config.supabaseUrl) || !config.supab
   process.exit(1);
 }
 config.supabaseUrl = config.supabaseUrl.replace(/\/$/, '');
+
+// Closed by default: without a list of approved emails the app refuses to start, so it can never be left open by mistake.
+if (!config.allowedEmails.length && process.env.ALLOW_ANY_SIGNED_IN !== 'true') {
+  console.error(
+    '\nNo approved people are set.\n' +
+    'Set ALLOWED_EMAILS to the email addresses that may use this app, separated by commas,\n' +
+    'for example  ALLOWED_EMAILS=you@gmail.com,editor@gmail.com  (see README.md, "Who can sign in").\n',
+  );
+  process.exit(1);
+}
 
 const app = createApp({
   createClient,

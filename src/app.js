@@ -58,10 +58,10 @@ function createApp({ createClient, config, supabaseBrowserBundle, google: google
 
   api.get('/health', (req, res) => res.json({ ok: true, time: new Date().toISOString() }));
   // These two values are meant to be public: the browser needs them to sign in with Supabase.
-  api.get('/config', (req, res) => res.json({ supabaseUrl: config.supabaseUrl, supabaseAnonKey: config.supabaseAnonKey, googleEnabled: google.enabled }));
+  api.get('/config', (req, res) => res.json({ supabaseUrl: config.supabaseUrl, supabaseAnonKey: config.supabaseAnonKey, googleEnabled: google.enabled, restricted: Boolean(config.allowedEmails && config.allowedEmails.length) }));
   // Open /api/diagnose in the browser to see, without signing in, whether the server is set up correctly.
   api.get('/diagnose', async (req, res) => {
-    const out = { node: process.version, env: { SUPABASE_URL: Boolean(config.supabaseUrl), SUPABASE_ANON_KEY: Boolean(config.supabaseAnonKey), PUBLIC_URL: Boolean(config.publicUrl), google: google.enabled },
+    const out = { node: process.version, env: { SUPABASE_URL: Boolean(config.supabaseUrl), SUPABASE_ANON_KEY: Boolean(config.supabaseAnonKey), PUBLIC_URL: Boolean(config.publicUrl), approvedEmails: (config.allowedEmails || []).length, google: google.enabled },
       supabaseHost: null, supabaseReachable: null, tables: null, templates: Boolean(templates && templates.routine && templates.routine.tasks.length) };
     try { out.supabaseHost = new URL(config.supabaseUrl).host; } catch (_) { out.supabaseHost = 'the SUPABASE_URL is not a valid address'; }
     if (out.supabaseHost && config.supabaseAnonKey) {

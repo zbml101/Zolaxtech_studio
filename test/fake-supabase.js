@@ -28,7 +28,7 @@ function createFake() {
     if (!m) return null;
     const h = crypto.createHash('sha1').update(m[1]).digest('hex');
     const id = `${h.slice(0, 8)}-${h.slice(8, 12)}-4${h.slice(13, 16)}-8${h.slice(17, 20)}-${h.slice(20, 32)}`;
-    return { id, email: m[1] };
+    return { id, email: m[1], email_confirmed_at: m[1].startsWith('unconfirmed-') ? null : '2026-01-01T00:00:00Z' };
   }
 
   const err = (code, message) => ({ data: null, error: { code, message } });

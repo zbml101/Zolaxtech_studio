@@ -61,7 +61,7 @@ export function renderAuth(root, { mode = 'signin', notice } = {}) {
     busy = false; draw();
   }
 
-  const titles = { signin: 'Sign in', signup: 'Create your account', forgot: 'Reset your password', recovery: 'Choose a new password', check: 'Check your email' };
+  const titles = { signin: 'Sign in', signup: 'Create your account', forgot: 'Reset your password', recovery: 'Choose your password', check: 'Check your email' };
   const cta = { signin: 'Sign in', signup: 'Create account', forgot: 'Send reset link', recovery: 'Save new password' };
 
   function view() {
@@ -77,6 +77,7 @@ export function renderAuth(root, { mode = 'signin', notice } = {}) {
       h('section', { class: 'auth-form' },
         h('form', { class: 'auth-card', onsubmit: submit, novalidate: true },
           h('h2', null, titles[current]),
+          auth.isRestricted() && (current === 'signin' || current === 'signup') ? h('p', { class: 'muted small' }, 'Private studio: only approved email addresses can use this app.') : null,
           current === 'forgot' ? h('p', { class: 'muted' }, 'Enter your email and we will send you a link to set a new password.') : null,
           msg ? h('div', { class: `notice ${msg.kind}`, role: msg.kind === 'err' ? 'alert' : 'status' }, msg.text) : null,
           showEmail ? field('Email', h('input', { type: 'email', name: 'email', autocomplete: 'email', required: true, inputmode: 'email', value: typed })) : null,

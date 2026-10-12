@@ -13,6 +13,7 @@ const app = createApp({
   createClient: fake.createClient,
   config: {
     supabaseUrl: 'https://fake.supabase.co', supabaseAnonKey: 'anon',
+    allowedEmails: (process.env.ALLOWED_EMAILS || '').split(',').map((e) => e.trim().toLowerCase()).filter(Boolean),
     google: { clientId: 'dev', clientSecret: 'dev', tokenKey: 'dev-only-key', authEndpoint: `http://localhost:${port}/fake-google-consent` },
   },
   supabaseBrowserBundle: path.join(__dirname, 'stub-supabase-browser.js'),
