@@ -59,6 +59,14 @@ Good to know:
 - **Disconnect Google** revokes the app's access and deletes the stored token.
 - The Google refresh token is stored encrypted (AES-256-GCM) with `TOKEN_KEY`, which lives only in the SnapDeploy environment variables. Do not change `TOKEN_KEY` later, or press Connect Google again if you do.
 
+## Optional: put the website on Cloudflare Pages (yourname.pages.dev)
+
+Pages hosts only the website; the backend stays on SnapDeploy and Pages forwards `/api/*` to it.
+1. Push this folder to GitHub. In Cloudflare: **Workers & Pages > Create > Pages > Connect to Git**.
+2. Project name = your address (`zolaxtech` gives `zolaxtech.pages.dev`). Framework: None. Build command: `npm install && node scripts/build-pages.js`. Output directory: `public`.
+3. Add the environment variable `BACKEND_URL` = your SnapDeploy address (no trailing slash), then deploy.
+4. Set `PUBLIC_URL` on SnapDeploy, the Supabase **Site URL / Redirect URLs**, and the Google redirect URI (`/google/callback`) to the pages.dev address.
+
 ## 4. Run it on your computer
 
 ```bash

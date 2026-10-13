@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "test": "node test/run.js && node test/google.test.js && node test/access.test.js"
+    "test": "node test/run.js && node test/google.test.js && node test/access.test.js && node test/pages-proxy.test.js"
   },
   "license": "UNLICENSED",
   "dependencies": {
