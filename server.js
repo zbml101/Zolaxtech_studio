@@ -14,11 +14,13 @@ try {
 } catch (_) { /* no .env file: fine */ }
 
 const { createClient: baseCreateClient } = require('@supabase/supabase-js');
-const WebSocket = require('ws');
 
 // supabase-js wants a WebSocket for its realtime feature, which this app never uses. Node 20 has none built in,
-// so hand it one; otherwise creating a client fails with "native WebSocket not found".
-const createClient = (url, key, options = {}) => baseCreateClient(url, key, { ...options, realtime: { transport: WebSocket } });
+// so creating a client fails with "native WebSocket not found" unless it is given a transport.
+// A do-nothing stand-in is enough, and it keeps the project free of any real WebSocket code (some hosts, like
+// SnapDeploy, then treat the app as plain web and let it run on the free plan).
+class NoRealtime { constructor() { throw new Error('Realtime is not used by this app'); } }
+const createClient = (url, key, options = {}) => baseCreateClient(url, key, { ...options, realtime: { transport: NoRealtime } });
 const { createApp } = require('./src/app');
 
 const config = {
