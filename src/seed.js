@@ -1,8 +1,14 @@
 // The starting plan: 41 videos and the idea bank, copied from the Excel planner.
-const fs = require('fs');
-const path = require('path');
-
-const read = (name) => JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', name), 'utf8'));
+// Plain require() calls with fixed names, so hosts that bundle only the files they can see (Vercel) include them.
+const FILES = {
+  'checklist.json': () => require('../data/checklist.json'),
+  'playbook.json': () => require('../data/playbook.json'),
+  'routine.json': () => require('../data/routine.json'),
+  'script.json': () => require('../data/script.json'),
+  'seed-ideas.json': () => require('../data/seed-ideas.json'),
+  'seed-videos.json': () => require('../data/seed-videos.json'),
+};
+const read = (name) => JSON.parse(JSON.stringify(FILES[name]()));
 
 function loadSeed() {
   const videos = read('seed-videos.json').map((v, i) => ({
