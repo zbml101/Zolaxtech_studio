@@ -52,7 +52,7 @@ function card(v) {
   const d = datesOf(v);
   const late = isOverdue(v);
   const nextDate = stageIndex(v.stage) < 2 ? ['Script', d.script] : stageIndex(v.stage) < 4 ? ['Edit', d.edit] : ['Publish', d.publish];
-  const el = h('button', { class: 'vcard', style: { '--sc': seriesColor(v.series) }, draggable: 'true', 'aria-label': `Week ${v.position}: ${v.title}`,
+  const el = h('button', { class: 'vcard', 'data-tilt': '', style: { '--sc': seriesColor(v.series) }, draggable: 'true', 'aria-label': `Week ${v.position}: ${v.title}`,
     onclick: () => go(v.id),
     ondragstart: (e) => { e.dataTransfer.setData('text/plain', v.id); e.dataTransfer.effectAllowed = 'move'; setTimeout(() => el.classList.add('dragging'), 0); },
     ondragend: () => el.classList.remove('dragging') },

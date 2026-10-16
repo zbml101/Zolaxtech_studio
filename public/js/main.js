@@ -1,6 +1,8 @@
 import { h, mount, reducedMotion } from './lib/dom.js';
 import { icon } from './lib/icons.js';
-import { toast, errorText } from './lib/ui.js';
+import { toast, errorText, modal } from './lib/ui.js';
+import './lib/fx.js';
+import { openNewVideo } from './views/pipeline.js';
 import { initAuth, getSession, onAuth, isRecovering, accessToken, signOut } from './auth.js';
 import { setTokenProvider, setSignedOutHandler } from './api.js';
 import { state, subscribe, load, reset, isOverdue, finishGoogleConnect } from './store.js';
@@ -200,6 +202,29 @@ subscribe(() => renderContent());
 
 document.addEventListener('keydown', (e) => {
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k' && shell) { e.preventDefault(); openPalette(); }
+});
+
+// Keyboard shortcuts: press g then a letter to jump, n for a new video, ? to see them all.
+const GO = { d: '', t: 'today', p: 'pipeline', i: 'ideas', b: 'playbook', r: 'review', s: 'settings' };
+let gWait = 0;
+function showShortcuts() {
+  const rows = [['g d', 'Dashboard'], ['g t', 'Today'], ['g p', 'Pipeline'], ['g i', 'Ideas'], ['g b', 'Playbook'], ['g r', 'Review'], ['g s', 'Settings'], ['n', 'New video'], ['Ctrl K', 'Search everything'], ['?', 'This list']];
+  modal({ title: 'Keyboard shortcuts', content: () => h('div', { class: 'shortcuts' }, rows.map(([k, t]) => h('div', null, h('span', null, k.split(' ').map((x) => h('span', { class: 'kbd' }, x))), h('span', { class: 'muted' }, t)))) });
+}
+document.addEventListener('keydown', (e) => {
+  if (!shell || !state.ready || e.ctrlKey || e.metaKey || e.altKey) return;
+  const t = e.target;
+  if (t && (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable)) return;
+  if (document.querySelector('.scrim')) return;
+  if (gWait) {
+    clearTimeout(gWait); gWait = 0;
+    const dest = GO[e.key.toLowerCase()];
+    if (dest !== undefined) { e.preventDefault(); location.hash = `#/${dest}`; }
+    return;
+  }
+  if (e.key === 'g') { gWait = setTimeout(() => { gWait = 0; }, 900); return; }
+  if (e.key === 'n') { e.preventDefault(); openNewVideo(); }
+  else if (e.key === '?') { e.preventDefault(); showShortcuts(); }
 });
 
 if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('/sw.js').catch(() => {});

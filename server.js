@@ -63,5 +63,9 @@ const app = createApp({
   supabaseBrowserBundle: path.join(__dirname, 'node_modules', '@supabase', 'supabase-js', 'dist', 'umd', 'supabase.js'),
 });
 
-const port = Number(process.env.PORT) || 3000;
-app.listen(port, '0.0.0.0', () => console.log(`ZolaxTech Studio is running on port ${port}`));
+// Run directly (SnapDeploy, your computer): start listening. Imported by api/index.js (Vercel): just hand over the app.
+if (require.main === module) {
+  const port = Number(process.env.PORT) || 3000;
+  app.listen(port, '0.0.0.0', () => console.log(`ZolaxTech Studio is running on port ${port}`));
+}
+module.exports = app;

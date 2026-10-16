@@ -59,6 +59,13 @@ Good to know:
 - **Disconnect Google** revokes the app's access and deletes the stored token.
 - The Google refresh token is stored encrypted (AES-256-GCM) with `TOKEN_KEY`, which lives only in the SnapDeploy environment variables. Do not change `TOKEN_KEY` later, or press Connect Google again if you do.
 
+## Optional: host on Vercel instead (free, no card, never sleeps)
+
+Vercel runs the whole app (website and API) as one serverless function, so there is no container to fall asleep.
+1. Push the project to GitHub. At vercel.com, sign in with GitHub, then **Add New > Project** and pick the repository. Framework: **Other**. Leave build settings empty.
+2. Under **Environment Variables** add `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `ALLOWED_EMAILS`, and (for Google) `PUBLIC_URL`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `TOKEN_KEY`. Deploy.
+3. Put your `https://<name>.vercel.app` address in the Supabase Site URL and Redirect URLs, and `/google/callback` on that address in the Google OAuth client.
+
 ## Optional: put the website on Cloudflare Pages (yourname.pages.dev)
 
 Pages hosts only the website; the backend stays on SnapDeploy and Pages forwards `/api/*` to it.

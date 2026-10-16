@@ -7,6 +7,7 @@ import { nice, niceLong, diffDays, nextTuesday, addDays, sundayOf, relative } fr
 import { state, datesOf, isOverdue, nextUp, isPublished, setStage, saveSettings, tasksFor, dayKeyOf, videoForWeek } from '../store.js';
 import { rundown, taskRow, stageBar } from './shared.js';
 import { openNewVideo } from './pipeline.js';
+import { journeyPanel } from './journey.js';
 
 const greeting = () => { const hr = new Date().getHours(); return hr < 12 ? 'Good morning' : hr < 18 ? 'Good afternoon' : 'Good evening'; };
 
@@ -42,7 +43,7 @@ function nextUpPanel(v) {
   }
   const idx = stageIndex(v.stage);
   const next = STAGES[idx + 1];
-  return h('section', { class: 'panel nextup', 'aria-label': 'Next video' },
+  return h('section', { class: 'panel nextup', 'data-tilt': '', 'aria-label': 'Next video' },
     h('div', { class: 'row between wrap gap' },
       h('span', { class: 'wk' }, `Up next · week ${v.position} of ${state.videos.length}`),
       seriesTag(v.series, seriesColor(v.series))),
@@ -112,6 +113,7 @@ export function renderDashboard() {
       h('div', { class: behind ? 'late' : '' }, h('dt', null, 'Behind schedule'), h('dd', null, h('span', { 'data-count': behind, 'data-key': 'behind' }, behind))),
       h('div', null, h('dt', null, 'Average views, first 7 days'), h('dd', null, avg == null ? '–' : h('span', { 'data-count': avg, 'data-key': 'avg' }, avg.toLocaleString()))),
       h('div', null, h('dt', null, 'Plan ends'), h('dd', null, last ? nice(datesOf(last).publish) : '–'))),
+    journeyPanel(),
     h('div', { class: 'cols' },
       h('div', { class: 'stack-l' }, nextUpPanel(v), upcomingPanel(v && v.id)),
       h('div', { class: 'stack-l' }, todayPanel(), seriesPanel())));
