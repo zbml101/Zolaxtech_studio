@@ -37,31 +37,39 @@ const config = {
   },
 };
 
+// Settings check. Run directly, a problem stops the start with a message. On Vercel it is shown on the page instead,
+// so you can read what is missing rather than a bare "500 FUNCTION_INVOCATION_FAILED".
+let problem = '';
 if (!/^https:\/\/.+\.supabase\.co\/?$/.test(config.supabaseUrl) || !config.supabaseAnonKey) {
-  console.error(
-    '\nMissing Supabase settings.\n' +
+  problem =
+    'Missing Supabase settings.\n' +
     'Set SUPABASE_URL (like https://abcdxyz.supabase.co) and SUPABASE_ANON_KEY (the "anon public" key)\n' +
-    'in the SnapDeploy dashboard (environment variables) or in a local .env file. See README.md.\n',
-  );
-  process.exit(1);
+    'in your host\'s environment variables (Vercel: Settings > Environment Variables) or in a local .env file, then redeploy.';
+} else if (!config.allowedEmails.length && process.env.ALLOW_ANY_SIGNED_IN !== 'true') {
+  // Closed by default: without a list of approved emails the app refuses to start, so it can never be left open by mistake.
+  problem =
+    'No approved people are set.\n' +
+    'Set ALLOWED_EMAILS to the email addresses that may use this app, separated by commas,\n' +
+    'for example  ALLOWED_EMAILS=you@gmail.com,editor@gmail.com  (see README.md, "Who can sign in"), then redeploy.';
 }
 config.supabaseUrl = config.supabaseUrl.replace(/\/$/, '');
 
-// Closed by default: without a list of approved emails the app refuses to start, so it can never be left open by mistake.
-if (!config.allowedEmails.length && process.env.ALLOW_ANY_SIGNED_IN !== 'true') {
-  console.error(
-    '\nNo approved people are set.\n' +
-    'Set ALLOWED_EMAILS to the email addresses that may use this app, separated by commas,\n' +
-    'for example  ALLOWED_EMAILS=you@gmail.com,editor@gmail.com  (see README.md, "Who can sign in").\n',
-  );
+if (problem && require.main === module) {
+  console.error('\n' + problem + '\n');
   process.exit(1);
 }
 
-const app = createApp({
-  createClient,
-  config,
-  supabaseBrowserBundle: path.join(__dirname, 'node_modules', '@supabase', 'supabase-js', 'dist', 'umd', 'supabase.js'),
-});
+let app;
+if (problem) {
+  console.error(problem);
+  app = (req, res) => { res.statusCode = 500; res.setHeader('content-type', 'text/plain; charset=utf-8'); res.end('ZolaxTech Studio is not set up yet.\n\n' + problem + '\n'); };
+} else {
+  app = createApp({
+    createClient,
+    config,
+    supabaseBrowserBundle: path.join(__dirname, 'node_modules', '@supabase', 'supabase-js', 'dist', 'umd', 'supabase.js'),
+  });
+}
 
 // Run directly (SnapDeploy, your computer): start listening. Imported by api/index.js (Vercel): just hand over the app.
 if (require.main === module) {
