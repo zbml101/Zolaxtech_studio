@@ -54,7 +54,8 @@ if (!/^https:\/\/.+\.supabase\.co\/?$/.test(config.supabaseUrl) || !config.supab
 }
 config.supabaseUrl = config.supabaseUrl.replace(/\/$/, '');
 
-if (problem && require.main === module) {
+const onVercel = Boolean(process.env.VERCEL);
+if (problem && require.main === module && !onVercel) {
   console.error('\n' + problem + '\n');
   process.exit(1);
 }
@@ -72,7 +73,7 @@ if (problem) {
 }
 
 // Run directly (SnapDeploy, your computer): start listening. Imported by api/index.js (Vercel): just hand over the app.
-if (require.main === module) {
+if (require.main === module && !onVercel) {
   const port = Number(process.env.PORT) || 3000;
   app.listen(port, '0.0.0.0', () => console.log(`ZolaxTech Studio is running on port ${port}`));
 }
