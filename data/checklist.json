@@ -1,142 +1,166 @@
 {
- "items": [
-  {
-   "id": "script-write",
-   "phase": "Script",
-   "text": "Full script written from the outline, using the Script Template parts 1 to 9",
-   "when": "Sunday"
-  },
-  {
-   "id": "script-test",
-   "phase": "Script",
-   "text": "Every step tested on screen exactly as you will show it (accounts, prompts, settings, downloads)",
-   "when": "Sunday"
-  },
-  {
-   "id": "script-read",
-   "phase": "Script",
-   "text": "Script read aloud once; pauses, zooms and graphics marked",
-   "when": "Sunday"
-  },
-  {
-   "id": "script-files",
-   "phase": "Script",
-   "text": "Practice files, prompts and links ready in the video's folder",
-   "when": "Monday"
-  },
-  {
-   "id": "rec-mic",
-   "phase": "Recording",
-   "text": "Microphone tested (30-second test, level in the good range, no echo)",
-   "when": "Tuesday"
-  },
-  {
-   "id": "rec-setup",
-   "phase": "Recording",
-   "text": "Notifications off, other apps closed, private details hidden, browser zoom at 125%",
-   "when": "Tuesday"
-  },
-  {
-   "id": "rec-sections",
-   "phase": "Recording",
-   "text": "Recorded in sections; first 2 minutes played back and checked",
-   "when": "Tuesday"
-  },
-  {
-   "id": "rec-backup",
-   "phase": "Recording",
-   "text": "Files named (W01_section01 ...) and backed up to Drive",
-   "when": "Tuesday"
-  },
-  {
-   "id": "edit-camtasia",
-   "phase": "Editing",
-   "text": "Camtasia: mistakes and long pauses cut, zoom and highlights added, chapter markers set, timing locked",
-   "when": "Thursday"
-  },
-  {
-   "id": "edit-audition",
-   "phase": "Editing",
-   "text": "Audio exported from Camtasia and cleaned in Audition (noise, volume, loudness)",
-   "when": "Thursday"
-  },
-  {
-   "id": "edit-capcut",
-   "phase": "Editing",
-   "text": "CapCut: clean audio in place and in sync; intro, outro, music, text and captions added",
-   "when": "Thursday"
-  },
-  {
-   "id": "edit-private",
-   "phase": "Editing",
-   "text": "Emails, passwords, phone numbers and other private details hidden or blurred",
-   "when": "Thursday"
-  },
-  {
-   "id": "edit-watch",
-   "phase": "Editing",
-   "text": "Final watch at normal speed: the first minute, every demo and the ending",
-   "when": "Thursday"
-  },
-  {
-   "id": "pub-thumb",
-   "phase": "Publishing",
-   "text": "Thumbnail readable on a phone (3 to 5 big words)",
-   "when": "Thursday"
-  },
-  {
-   "id": "pub-title",
-   "phase": "Publishing",
-   "text": "Title has Amharic and English keywords",
-   "when": "Thursday"
-  },
-  {
-   "id": "pub-desc",
-   "phase": "Publishing",
-   "text": "Description: first-line promise, chapters, links, practice files and prompts",
-   "when": "Thursday"
-  },
-  {
-   "id": "pub-links",
-   "phase": "Publishing",
-   "text": "Playlist set, end screen and next episode linked, pinned comment ready",
-   "when": "Thursday"
-  },
-  {
-   "id": "pub-schedule",
-   "phase": "Publishing",
-   "text": "Scheduled for Saturday; Edited, Thumbnail and Uploaded ticked in the calendar",
-   "when": "Thursday"
-  },
-  {
-   "id": "post-live",
-   "phase": "After publishing",
-   "text": "Live check: it plays correctly, the audio is good and the chapters show",
-   "when": "Saturday"
-  },
-  {
-   "id": "post-share",
-   "phase": "After publishing",
-   "text": "Shared in your Telegram or social groups",
-   "when": "Saturday"
-  },
-  {
-   "id": "post-comments",
-   "phase": "After publishing",
-   "text": "Replied to comments within 24 hours",
-   "when": "Monday"
-  },
-  {
-   "id": "post-short",
-   "phase": "After publishing",
-   "text": "One Short cut from the video and posted",
-   "when": "Within the week"
-  },
-  {
-   "id": "post-views",
-   "phase": "After publishing",
-   "text": "Views after 7 days written in the calendar",
-   "when": "Next Saturday"
-  }
- ]
+  "items": [
+    {
+      "id": "script-write",
+      "phase": "Script",
+      "text": "Full script written from the outline, using the Script Template parts 1 to 9",
+      "when": "Sunday"
+    },
+    {
+      "id": "script-test",
+      "phase": "Script",
+      "text": "Every step tested on screen exactly as you will show it (accounts, prompts, settings, downloads)",
+      "when": "Sunday"
+    },
+    {
+      "id": "script-read",
+      "phase": "Script",
+      "text": "Script read aloud once; pauses, zooms and graphics marked",
+      "when": "Sunday"
+    },
+    {
+      "id": "script-files",
+      "phase": "Script",
+      "text": "Practice files, prompts and links ready in the video's folder",
+      "when": "Monday"
+    },
+    {
+      "id": "rec-mic",
+      "phase": "Recording",
+      "text": "Microphone tested (30-second test, level in the good range, no echo)",
+      "when": "Tuesday"
+    },
+    {
+      "id": "rec-setup",
+      "phase": "Recording",
+      "text": "Notifications off, other apps closed, private details hidden, browser zoom at 125%",
+      "when": "Tuesday"
+    },
+    {
+      "id": "rec-sections",
+      "phase": "Recording",
+      "text": "Recorded in sections; first 2 minutes played back and checked",
+      "when": "Tuesday"
+    },
+    {
+      "id": "rec-backup",
+      "phase": "Recording",
+      "text": "Files named (W01_section01 ...) and backed up to Drive",
+      "when": "Tuesday"
+    },
+    {
+      "id": "edit-camtasia",
+      "phase": "Editing",
+      "text": "Camtasia: mistakes and long pauses cut, zoom and highlights added, chapter markers set, timing locked",
+      "when": "Thursday"
+    },
+    {
+      "id": "edit-audition",
+      "phase": "Editing",
+      "text": "Audio exported from Camtasia and cleaned in Audition (noise, volume, loudness)",
+      "when": "Thursday"
+    },
+    {
+      "id": "edit-capcut",
+      "phase": "Editing",
+      "text": "CapCut: clean audio in place and in sync; intro, outro, music, text and captions added",
+      "when": "Thursday"
+    },
+    {
+      "id": "edit-private",
+      "phase": "Editing",
+      "text": "Emails, passwords, phone numbers and other private details hidden or blurred",
+      "when": "Thursday"
+    },
+    {
+      "id": "edit-watch",
+      "phase": "Editing",
+      "text": "Final watch at normal speed: the first minute, every demo and the ending",
+      "when": "Thursday"
+    },
+    {
+      "id": "pub-thumb",
+      "phase": "Publishing",
+      "text": "Thumbnail readable on a phone (3 to 5 big words)",
+      "when": "Thursday"
+    },
+    {
+      "id": "pub-title",
+      "phase": "Publishing",
+      "text": "Title has Amharic and English keywords",
+      "when": "Thursday"
+    },
+    {
+      "id": "pub-desc",
+      "phase": "Publishing",
+      "text": "Description: first-line promise, chapters, links, practice files and prompts",
+      "when": "Thursday"
+    },
+    {
+      "id": "pub-links",
+      "phase": "Publishing",
+      "text": "Playlist set, end screen and next episode linked, pinned comment ready",
+      "when": "Thursday"
+    },
+    {
+      "id": "pub-schedule",
+      "phase": "Publishing",
+      "text": "Scheduled for Saturday; Edited, Thumbnail and Uploaded ticked in the calendar",
+      "when": "Thursday"
+    },
+    {
+      "id": "en-text",
+      "phase": "English version",
+      "text": "English narration text cleaned for text to speech (numbers and addresses spelled out, pauses marked)",
+      "when": "Sunday"
+    },
+    {
+      "id": "en-tts",
+      "phase": "English version",
+      "text": "English voice made in Google AI Studio, every section listened to and fixed",
+      "when": "Friday"
+    },
+    {
+      "id": "en-edit",
+      "phase": "English version",
+      "text": "English video edited: English audio in time with the screen, on-screen text and captions in English",
+      "when": "Friday"
+    },
+    {
+      "id": "en-upload",
+      "phase": "English version",
+      "text": "English version uploaded with an English title, description and thumbnail, and scheduled",
+      "when": "Friday"
+    },
+    {
+      "id": "post-live",
+      "phase": "After publishing",
+      "text": "Live check: it plays correctly, the audio is good and the chapters show",
+      "when": "Saturday"
+    },
+    {
+      "id": "post-share",
+      "phase": "After publishing",
+      "text": "Shared in your Telegram or social groups",
+      "when": "Saturday"
+    },
+    {
+      "id": "post-comments",
+      "phase": "After publishing",
+      "text": "Replied to comments within 24 hours",
+      "when": "Monday"
+    },
+    {
+      "id": "post-short",
+      "phase": "After publishing",
+      "text": "One Short cut from the video and posted",
+      "when": "Within the week"
+    },
+    {
+      "id": "post-views",
+      "phase": "After publishing",
+      "text": "Views after 7 days written in the calendar",
+      "when": "Next Saturday"
+    }
+  ]
 }

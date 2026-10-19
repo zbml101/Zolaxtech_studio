@@ -18,6 +18,7 @@ const app = createApp({
   },
   supabaseBrowserBundle: path.join(__dirname, 'stub-supabase-browser.js'),
   google: { fetchImpl: g.fetchImpl },
+  mailer: { enabled: true, async send(m) { console.log('[dev mail]', m.to, '|', m.subject); return true; } },
 });
 
 const outer = express();

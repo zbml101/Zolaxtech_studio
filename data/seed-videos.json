@@ -1,207 +1,212 @@
 [
- {
-  "series": "AI Tools",
-  "title": "ChatGPT for Beginners: Sign Up, First Chat and Everyday Uses",
-  "key_points": "Create an account; how to ask; 5 everyday uses (study, writing, translation, planning, ideas); what ChatGPT gets wrong"
- },
- {
-  "series": "AI Tools",
-  "title": "Advanced ChatGPT Tutorial | Prompt Engineering, Research and Productivity",
-  "key_points": "Prompt engineering (role, task, context, format, examples); improve answers with follow-ups; research with ChatGPT and fact-checking; productivity workflows; reusable prompt templates"
- },
- {
-  "series": "AI Tools",
-  "title": "How to Write Good Prompts (Amharic and English examples)",
-  "key_points": "Role + task + context + format; before/after prompts; reusable templates; how to improve an answer step by step"
- },
- {
-  "series": "AI Tools",
-  "title": "NotebookLM for Reading and Research",
-  "key_points": "Create a notebook; add PDFs and links; ask questions and see sources; summaries, study guide, audio overview"
- },
- {
-  "series": "AI Tools",
-  "title": "Research Workflow: ChatGPT + NotebookLM + Google Docs",
-  "key_points": "Full workflow from topic to notes; how to fact-check AI answers; saving notes in Docs"
- },
- {
-  "series": "Computer Basics",
-  "title": "Computer Basics #1: What Is a Computer? Hardware vs Software",
-  "key_points": "CPU, RAM, storage, screen; input and output; laptop vs desktop; what an operating system does"
- },
- {
-  "series": "Computer Basics",
-  "title": "Computer Basics #2: Windows Desktop, Start Menu, Taskbar and Settings",
-  "key_points": "Tour of Windows; opening and closing apps; windows and tabs; basic settings (display, sound, Wi-Fi)"
- },
- {
-  "series": "Computer Basics",
-  "title": "Computer Basics #3: Files and Folders (Create, Copy, Move, Delete, Search)",
-  "key_points": "File types and extensions; Recycle Bin; flash disk; keeping files organized; simple backups"
- },
- {
-  "series": "Computer Basics",
-  "title": "Computer Basics #4: Mouse, Keyboard, Shortcuts and Amharic Typing",
-  "key_points": "Mouse and typing practice; essential shortcuts (copy, paste, undo, save); setting up Amharic typing"
- },
- {
-  "series": "Computer Basics",
-  "title": "Computer Basics #5: Internet Basics (Wi-Fi, Browser, Searching)",
-  "key_points": "What the internet is; connect to Wi-Fi; browser tabs and bookmarks; searching well; downloads"
- },
- {
-  "series": "Computer Basics",
-  "title": "Computer Basics #6: Staying Safe Online (Passwords, Scams, Updates)",
-  "key_points": "Strong passwords; 2-step verification; spotting phishing and fake messages; updates and antivirus basics"
- },
- {
-  "series": "Computer Basics",
-  "title": "Computer Basics #7: Email for Beginners",
-  "key_points": "Create an email account; send and receive; attachments; professional email habits; spam"
- },
- {
-  "series": "Computer Basics",
-  "title": "Computer Basics #8: Install and Remove Programs, Updates and Drivers",
-  "key_points": "Safe places to download; install and uninstall; Windows Update; what drivers are"
- },
- {
-  "series": "Computer Basics",
-  "title": "Computer Basics #9: Fix Common Problems (Slow PC, Wi-Fi, Printer)",
-  "key_points": "IT-support style checklist: restart, Task Manager, disk space, cables, Wi-Fi checks, printer basics"
- },
- {
-  "series": "Computer Basics",
-  "title": "Computer Basics #10: Phone and Computer Together (Transfer, Print, Backup)",
-  "key_points": "USB and Bluetooth transfer; cloud backup; printing from phone and PC"
- },
- {
-  "series": "Google Workspace",
-  "title": "Google Account and Google Drive Setup",
-  "key_points": "Create and secure an account; upload files; folders; sharing and permissions"
- },
- {
-  "series": "Google Workspace",
-  "title": "Gmail: Inbox, Labels, Filters and Signatures",
-  "key_points": "Compose and attach; labels; filters; scheduled send; signature; search tricks"
- },
- {
-  "series": "Google Workspace",
-  "title": "Google Calendar: Events, Reminders and Time Blocking",
-  "key_points": "Create events; recurring events; notifications; sharing a calendar; Google Tasks"
- },
- {
-  "series": "Google Workspace",
-  "title": "Google Docs: Write, Format and Share Documents",
-  "key_points": "Headings and styles; table of contents; comments; version history; export to PDF/Word"
- },
- {
-  "series": "Google Workspace",
-  "title": "Google Sheets for Beginners: Cells, Formatting and Basic Formulas",
-  "key_points": "Rows, columns, cells; SUM and AVERAGE; sorting and filtering; first chart"
- },
- {
-  "series": "Google Workspace",
-  "title": "Google Sheets Level 2: Lookups, Pivot Tables and Charts",
-  "key_points": "IF and VLOOKUP; pivot tables; data validation; build a simple budget tracker"
- },
- {
-  "series": "Google Workspace",
-  "title": "Google Slides: Design and Present a Presentation",
-  "key_points": "Layouts and themes; images; transitions; present mode; export to PowerPoint/PDF"
- },
- {
-  "series": "Google Workspace",
-  "title": "Google Forms and Google Meet",
-  "key_points": "Build a survey or quiz; send responses to Sheets; start and join a Meet call"
- },
- {
-  "series": "Web Dev - HTML",
-  "title": "Full-Stack Roadmap and Set Up VS Code",
-  "key_points": "Path: HTML, CSS, JavaScript, PHP, React, Node.js; install VS Code and Live Server; first page"
- },
- {
-  "series": "Web Dev - HTML",
-  "title": "HTML Basics: Structure, Text, Links and Images",
-  "key_points": "Document structure; headings and paragraphs; links; images; common mistakes"
- },
- {
-  "series": "Web Dev - HTML",
-  "title": "HTML Lists, Tables and Forms",
-  "key_points": "Ordered and unordered lists; tables; form inputs, labels and buttons"
- },
- {
-  "series": "Web Dev - HTML",
-  "title": "HTML Project: Build a Personal Profile Page",
-  "key_points": "Put everything together in one page; review; ideas to extend it"
- },
- {
-  "series": "Web Dev - CSS",
-  "title": "CSS Basics: Selectors, Colors and Fonts",
-  "key_points": "Link a stylesheet; selectors; colors; fonts; classes and IDs"
- },
- {
-  "series": "Web Dev - CSS",
-  "title": "CSS Box Model, Spacing and Borders",
-  "key_points": "Margin, border, padding; width and height; display types"
- },
- {
-  "series": "Web Dev - CSS",
-  "title": "CSS Flexbox",
-  "key_points": "Flex container and items; alignment; building a navigation bar and card row"
- },
- {
-  "series": "Web Dev - CSS",
-  "title": "CSS Grid and Responsive Design",
-  "key_points": "Grid layout; media queries; mobile-first thinking"
- },
- {
-  "series": "Web Dev - CSS",
-  "title": "CSS Project: Responsive Landing Page",
-  "key_points": "Build a full landing page using everything from the CSS series"
- },
- {
-  "series": "Web Dev - JavaScript",
-  "title": "JavaScript Basics: Variables, Data Types and Operators",
-  "key_points": "Console; let and const; strings, numbers, booleans; operators"
- },
- {
-  "series": "Web Dev - JavaScript",
-  "title": "JavaScript Conditions, Loops and Functions",
-  "key_points": "if/else; for and while loops; writing and calling functions"
- },
- {
-  "series": "Web Dev - JavaScript",
-  "title": "JavaScript Arrays and Objects",
-  "key_points": "Arrays and common methods; objects; looping through data"
- },
- {
-  "series": "Web Dev - JavaScript",
-  "title": "JavaScript DOM: Select and Change Page Elements",
-  "key_points": "querySelector; changing text and styles; creating elements"
- },
- {
-  "series": "Web Dev - JavaScript",
-  "title": "JavaScript Events and Forms",
-  "key_points": "Click and input events; reading form values; simple validation"
- },
- {
-  "series": "Web Dev - JavaScript",
-  "title": "JavaScript Project: To-Do App",
-  "key_points": "Build a to-do list; save to localStorage; ideas to extend it"
- },
- {
-  "series": "Community",
-  "title": "Q&A and Catch-Up Week (answer viewer questions)",
-  "key_points": "Collect comment questions; answer the best ones; show a few fixes; preview what is coming next. Also works as a buffer week."
- },
- {
-  "series": "Web Dev - PHP",
-  "title": "PHP Basics: Set Up XAMPP and Your First Script",
-  "key_points": "Install XAMPP; how PHP runs on a server; echo, variables, simple logic"
- },
- {
-  "series": "Web Dev - PHP",
-  "title": "PHP Forms: Handling User Input",
-  "key_points": "GET and POST; reading form data; basic validation; preview of MySQL next"
- }
+  {
+    "series": "AI Tools",
+    "title": "ChatGPT for Beginners: Sign Up, First Chat and Everyday Uses",
+    "key_points": "Create an account; how to ask; 5 everyday uses (study, writing, translation, planning, ideas); what ChatGPT gets wrong"
+  },
+  {
+    "series": "AI Tools",
+    "title": "Advanced ChatGPT Tutorial | Prompt Engineering, Research and Productivity",
+    "key_points": "Prompt engineering (role, task, context, format, examples); improve answers with follow-ups; research with ChatGPT and fact-checking; productivity workflows; reusable prompt templates"
+  },
+  {
+    "series": "AI Tools",
+    "title": "10 Ways Students Can Use ChatGPT to Study Without Cheating",
+    "key_points": "Explain a hard topic in simple words; make practice questions and quizzes; summarise your own notes; plan a study timetable; get feedback on your own writing (not writing it for you); learn from mistakes; what counts as cheating and how to stay honest"
+  },
+  {
+    "series": "AI Tools",
+    "title": "How to Write Good Prompts (Amharic and English examples)",
+    "key_points": "Role + task + context + format; before/after prompts; reusable templates; how to improve an answer step by step"
+  },
+  {
+    "series": "AI Tools",
+    "title": "NotebookLM for Reading and Research",
+    "key_points": "Create a notebook; add PDFs and links; ask questions and see sources; summaries, study guide, audio overview"
+  },
+  {
+    "series": "AI Tools",
+    "title": "Research Workflow: ChatGPT + NotebookLM + Google Docs",
+    "key_points": "Full workflow from topic to notes; how to fact-check AI answers; saving notes in Docs"
+  },
+  {
+    "series": "Computer Basics",
+    "title": "Computer Basics #1: What Is a Computer? Hardware vs Software",
+    "key_points": "CPU, RAM, storage, screen; input and output; laptop vs desktop; what an operating system does"
+  },
+  {
+    "series": "Computer Basics",
+    "title": "Computer Basics #2: Windows Desktop, Start Menu, Taskbar and Settings",
+    "key_points": "Tour of Windows; opening and closing apps; windows and tabs; basic settings (display, sound, Wi-Fi)"
+  },
+  {
+    "series": "Computer Basics",
+    "title": "Computer Basics #3: Files and Folders (Create, Copy, Move, Delete, Search)",
+    "key_points": "File types and extensions; Recycle Bin; flash disk; keeping files organized; simple backups"
+  },
+  {
+    "series": "Computer Basics",
+    "title": "Computer Basics #4: Mouse, Keyboard, Shortcuts and Amharic Typing",
+    "key_points": "Mouse and typing practice; essential shortcuts (copy, paste, undo, save); setting up Amharic typing"
+  },
+  {
+    "series": "Computer Basics",
+    "title": "Computer Basics #5: Internet Basics (Wi-Fi, Browser, Searching)",
+    "key_points": "What the internet is; connect to Wi-Fi; browser tabs and bookmarks; searching well; downloads"
+  },
+  {
+    "series": "Computer Basics",
+    "title": "Computer Basics #6: Staying Safe Online (Passwords, Scams, Updates)",
+    "key_points": "Strong passwords; 2-step verification; spotting phishing and fake messages; updates and antivirus basics"
+  },
+  {
+    "series": "Computer Basics",
+    "title": "Computer Basics #7: Email for Beginners",
+    "key_points": "Create an email account; send and receive; attachments; professional email habits; spam"
+  },
+  {
+    "series": "Computer Basics",
+    "title": "Computer Basics #8: Install and Remove Programs, Updates and Drivers",
+    "key_points": "Safe places to download; install and uninstall; Windows Update; what drivers are"
+  },
+  {
+    "series": "Computer Basics",
+    "title": "Computer Basics #9: Fix Common Problems (Slow PC, Wi-Fi, Printer)",
+    "key_points": "IT-support style checklist: restart, Task Manager, disk space, cables, Wi-Fi checks, printer basics"
+  },
+  {
+    "series": "Computer Basics",
+    "title": "Computer Basics #10: Phone and Computer Together (Transfer, Print, Backup)",
+    "key_points": "USB and Bluetooth transfer; cloud backup; printing from phone and PC"
+  },
+  {
+    "series": "Google Workspace",
+    "title": "Google Account and Google Drive Setup",
+    "key_points": "Create and secure an account; upload files; folders; sharing and permissions"
+  },
+  {
+    "series": "Google Workspace",
+    "title": "Gmail: Inbox, Labels, Filters and Signatures",
+    "key_points": "Compose and attach; labels; filters; scheduled send; signature; search tricks"
+  },
+  {
+    "series": "Google Workspace",
+    "title": "Google Calendar: Events, Reminders and Time Blocking",
+    "key_points": "Create events; recurring events; notifications; sharing a calendar; Google Tasks"
+  },
+  {
+    "series": "Google Workspace",
+    "title": "Google Docs: Write, Format and Share Documents",
+    "key_points": "Headings and styles; table of contents; comments; version history; export to PDF/Word"
+  },
+  {
+    "series": "Google Workspace",
+    "title": "Google Sheets for Beginners: Cells, Formatting and Basic Formulas",
+    "key_points": "Rows, columns, cells; SUM and AVERAGE; sorting and filtering; first chart"
+  },
+  {
+    "series": "Google Workspace",
+    "title": "Google Sheets Level 2: Lookups, Pivot Tables and Charts",
+    "key_points": "IF and VLOOKUP; pivot tables; data validation; build a simple budget tracker"
+  },
+  {
+    "series": "Google Workspace",
+    "title": "Google Slides: Design and Present a Presentation",
+    "key_points": "Layouts and themes; images; transitions; present mode; export to PowerPoint/PDF"
+  },
+  {
+    "series": "Google Workspace",
+    "title": "Google Forms and Google Meet",
+    "key_points": "Build a survey or quiz; send responses to Sheets; start and join a Meet call"
+  },
+  {
+    "series": "Web Dev - HTML",
+    "title": "Full-Stack Roadmap and Set Up VS Code",
+    "key_points": "Path: HTML, CSS, JavaScript, PHP, React, Node.js; install VS Code and Live Server; first page"
+  },
+  {
+    "series": "Web Dev - HTML",
+    "title": "HTML Basics: Structure, Text, Links and Images",
+    "key_points": "Document structure; headings and paragraphs; links; images; common mistakes"
+  },
+  {
+    "series": "Web Dev - HTML",
+    "title": "HTML Lists, Tables and Forms",
+    "key_points": "Ordered and unordered lists; tables; form inputs, labels and buttons"
+  },
+  {
+    "series": "Web Dev - HTML",
+    "title": "HTML Project: Build a Personal Profile Page",
+    "key_points": "Put everything together in one page; review; ideas to extend it"
+  },
+  {
+    "series": "Web Dev - CSS",
+    "title": "CSS Basics: Selectors, Colors and Fonts",
+    "key_points": "Link a stylesheet; selectors; colors; fonts; classes and IDs"
+  },
+  {
+    "series": "Web Dev - CSS",
+    "title": "CSS Box Model, Spacing and Borders",
+    "key_points": "Margin, border, padding; width and height; display types"
+  },
+  {
+    "series": "Web Dev - CSS",
+    "title": "CSS Flexbox",
+    "key_points": "Flex container and items; alignment; building a navigation bar and card row"
+  },
+  {
+    "series": "Web Dev - CSS",
+    "title": "CSS Grid and Responsive Design",
+    "key_points": "Grid layout; media queries; mobile-first thinking"
+  },
+  {
+    "series": "Web Dev - CSS",
+    "title": "CSS Project: Responsive Landing Page",
+    "key_points": "Build a full landing page using everything from the CSS series"
+  },
+  {
+    "series": "Web Dev - JavaScript",
+    "title": "JavaScript Basics: Variables, Data Types and Operators",
+    "key_points": "Console; let and const; strings, numbers, booleans; operators"
+  },
+  {
+    "series": "Web Dev - JavaScript",
+    "title": "JavaScript Conditions, Loops and Functions",
+    "key_points": "if/else; for and while loops; writing and calling functions"
+  },
+  {
+    "series": "Web Dev - JavaScript",
+    "title": "JavaScript Arrays and Objects",
+    "key_points": "Arrays and common methods; objects; looping through data"
+  },
+  {
+    "series": "Web Dev - JavaScript",
+    "title": "JavaScript DOM: Select and Change Page Elements",
+    "key_points": "querySelector; changing text and styles; creating elements"
+  },
+  {
+    "series": "Web Dev - JavaScript",
+    "title": "JavaScript Events and Forms",
+    "key_points": "Click and input events; reading form values; simple validation"
+  },
+  {
+    "series": "Web Dev - JavaScript",
+    "title": "JavaScript Project: To-Do App",
+    "key_points": "Build a to-do list; save to localStorage; ideas to extend it"
+  },
+  {
+    "series": "Community",
+    "title": "Q&A and Catch-Up Week (answer viewer questions)",
+    "key_points": "Collect comment questions; answer the best ones; show a few fixes; preview what is coming next. Also works as a buffer week."
+  },
+  {
+    "series": "Web Dev - PHP",
+    "title": "PHP Basics: Set Up XAMPP and Your First Script",
+    "key_points": "Install XAMPP; how PHP runs on a server; echo, variables, simple logic"
+  },
+  {
+    "series": "Web Dev - PHP",
+    "title": "PHP Forms: Handling User Input",
+    "key_points": "GET and POST; reading form data; basic validation; preview of MySQL next"
+  }
 ]

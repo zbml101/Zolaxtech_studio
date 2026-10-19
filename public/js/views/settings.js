@@ -5,7 +5,7 @@ import { PUBLISH_DAYS } from '../lib/constants.js';
 import { weekday, nice, addDays } from '../lib/dates.js';
 import { state, saveSettings, connectGoogle, disconnectGoogle, syncCalendar, exportSheet } from '../store.js';
 import { confirmDialog } from '../lib/ui.js';
-import { download } from '../api.js';
+import { download, api } from '../api.js';
 import { signOut } from '../auth.js';
 
 export function currentTheme() { return document.documentElement.getAttribute('data-theme'); }
@@ -54,6 +54,23 @@ function googlePanel(rerender) {
     } }, 'Disconnect Google')));
 }
 
+let sending = false;
+function emailPanel(rerender) {
+  const on = state.settings.daily_email !== false;
+  const set = async (value) => { try { await saveSettings({ daily_email: value }); toast(value ? 'Daily email is on.' : 'Daily email is off.', 'success'); } catch (_) { /* store showed the error */ } };
+  const sendNow = async () => {
+    if (sending) return;
+    sending = true; rerender();
+    try { const r = await api.post('/email/test', {}); toast(`Sent to ${r.to}. Check your inbox (and spam).`, 'success'); } catch (e) { toast(errorText(e), 'error'); }
+    sending = false; rerender();
+  };
+  return h('section', { class: 'panel stack' }, h('h2', null, 'Daily email'),
+    h('p', { class: 'muted small' }, 'Every morning at about 6:00 (Ethiopia time) you get one email with today\'s role, the tasks, any video steps due today, and anything that is behind schedule.'),
+    h('div', { class: 'seg-ctl', role: 'group', 'aria-label': 'Daily email' },
+      [[true, 'On'], [false, 'Off']].map(([v, label]) => h('button', { class: on === v ? 'on' : '', 'aria-pressed': on === v ? 'true' : 'false', onclick: () => { if (on !== v) set(v); } }, label))),
+    h('div', null, h('button', { class: 'btn', disabled: sending, onclick: sendNow }, icon('external'), sending ? 'Sending…' : 'Send me today\'s email now')));
+}
+
 export function renderSettings(rerender) {
   const st = state.settings;
   const save = async (patch, ok = 'Saved.') => { try { await saveSettings(patch); toast(ok, 'success'); } catch (_) { /* store already showed the error */ } };
@@ -76,6 +93,7 @@ export function renderSettings(rerender) {
           h('option', { value: 'voiceover', selected: st.recording_method === 'voiceover' }, 'Voice-over recorded after the screen'))),),
       h('div', { class: 'stack-l' },
         googlePanel(rerender),
+        emailPanel(rerender),
         h('section', { class: 'panel stack' }, h('h2', null, 'Appearance'),
           h('div', { class: 'seg-ctl', role: 'group', 'aria-label': 'Theme' },
             [['dark', 'Dark', 'moon'], ['light', 'Light', 'sun']].map(([t, label, ic]) => h('button', { class: currentTheme() === t ? 'on' : '', 'aria-pressed': currentTheme() === t ? 'true' : 'false', onclick: () => { setTheme(t); rerender(); } }, icon(ic), label)))),

@@ -34,7 +34,7 @@ async function test(name, fn) {
     const cfg = (await call('GET', '/api/config', { token: null })).json;
     assert.strictEqual(cfg.supabaseUrl, 'https://fake.supabase.co');
     const t = (await call('GET', '/api/templates', { token: null })).json;
-    assert.ok(t.routine.tasks.length >= 20 && t.checklist.items.length === 23 && t.script.parts.length === 9);
+    assert.ok(t.routine.tasks.length >= 20 && t.checklist.items.length === 27 && t.script.parts.length === 9);
     assert.deepStrictEqual(t.stages.length, 7);
   });
 
@@ -48,7 +48,7 @@ async function test(name, fn) {
     assert.strictEqual((await call('POST', '/api/bootstrap')).json.created, true);
     assert.strictEqual((await call('POST', '/api/bootstrap')).json.created, false);
     const s = (await call('GET', '/api/state')).json;
-    assert.strictEqual(s.videos.length, 41);
+    assert.strictEqual(s.videos.length, 42);
     assert.ok(s.ideas.length >= 55);
     assert.strictEqual(s.videos[1].title, 'Advanced ChatGPT Tutorial | Prompt Engineering, Research and Productivity');
     assert.strictEqual(s.videos[2].position, 3);
@@ -94,8 +94,8 @@ async function test(name, fn) {
     assert.strictEqual(r.status, 201);
     assert.strictEqual(r.json.position, 2);
     let s = (await call('GET', '/api/state')).json;
-    assert.strictEqual(s.videos.length, 42);
-    assert.deepStrictEqual(s.videos.map((v) => v.position), Array.from({ length: 42 }, (_, i) => i + 1));
+    assert.strictEqual(s.videos.length, 43);
+    assert.deepStrictEqual(s.videos.map((v) => v.position), Array.from({ length: 43 }, (_, i) => i + 1));
     assert.strictEqual(s.videos[1].title, 'New video');
 
     const ids = s.videos.map((v) => v.id);
@@ -108,8 +108,8 @@ async function test(name, fn) {
 
     assert.strictEqual((await call('DELETE', `/api/videos/${r.json.id}`)).status, 200);
     s = (await call('GET', '/api/state')).json;
-    assert.strictEqual(s.videos.length, 41);
-    assert.deepStrictEqual(s.videos.map((v) => v.position), Array.from({ length: 41 }, (_, i) => i + 1));
+    assert.strictEqual(s.videos.length, 42);
+    assert.deepStrictEqual(s.videos.map((v) => v.position), Array.from({ length: 42 }, (_, i) => i + 1));
   });
 
   await test('ideas: add, edit, promote to a video, delete', async () => {
@@ -176,12 +176,12 @@ async function test(name, fn) {
   await test('exports: calendar and CSV', async () => {
     const ics = await call('GET', '/api/export/calendar.ics', { raw: true });
     assert.match(ics.headers.get('content-type'), /text\/calendar/);
-    assert.strictEqual((ics.text.match(/BEGIN:VEVENT/g) || []).length, 41 * 4);
+    assert.strictEqual((ics.text.match(/BEGIN:VEVENT/g) || []).length, 42 * 4);
     assert.ok(ics.text.includes('DTSTART;VALUE=DATE:20261018'), 'first script day is the Sunday before the first Tuesday');
     ics.text.split('\r\n').forEach((l) => assert.ok(Buffer.byteLength(l) <= 75, 'line too long: ' + l));
     const csv = await call('GET', '/api/export/videos.csv', { raw: true });
     const lines = csv.text.trim().split('\r\n');
-    assert.strictEqual(lines.length, 42);
+    assert.strictEqual(lines.length, 43);
     assert.ok(lines[0].includes('Publish day'));
   });
 

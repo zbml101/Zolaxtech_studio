@@ -243,3 +243,6 @@ drop policy if exists "own rows" on public.google_connections;
 create policy "own rows" on public.google_connections for all to authenticated using (user_id = auth.uid()) with check (user_id = auth.uid());
 revoke all on public.google_connections from anon;
 grant select, insert, update, delete on public.google_connections to authenticated;
+
+-- ---------------------------------------------------------------- Daily email (added later; safe to run again)
+alter table public.settings add column if not exists daily_email boolean not null default true;

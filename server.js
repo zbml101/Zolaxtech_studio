@@ -29,6 +29,12 @@ const config = {
   publicUrl: (process.env.PUBLIC_URL || '').trim(),
   // Only these people may use the app (comma-separated emails). Anyone else who signs up is turned away.
   allowedEmails: (process.env.ALLOWED_EMAILS || '').split(/[,;\s]+/).map((e) => e.trim().toLowerCase()).filter(Boolean),
+  // Optional: the daily email. Resend sends it; Vercel Cron triggers it; the service key lets the schedule read your plan.
+  resendKey: (process.env.RESEND_API_KEY || '').trim(),
+  mailFrom: (process.env.MAIL_FROM || '').trim(),
+  cronSecret: (process.env.CRON_SECRET || '').trim(),
+  supabaseServiceKey: (process.env.SUPABASE_SERVICE_ROLE_KEY || '').trim(),
+  timezone: (process.env.TIMEZONE || 'Africa/Addis_Ababa').trim(),
   // Optional: Google Workspace connection. Without these three the app works the same, minus the Google buttons.
   google: {
     clientId: (process.env.GOOGLE_CLIENT_ID || '').trim(),

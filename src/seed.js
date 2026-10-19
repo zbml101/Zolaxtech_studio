@@ -1,4 +1,4 @@
-// The starting plan: 41 videos and the idea bank, copied from the Excel planner.
+// The starting plan: 42 videos and the idea bank, copied from the Excel planner.
 // Plain require() calls with fixed names, so hosts that bundle only the files they can see (Vercel) include them.
 const FILES = {
   'checklist.json': () => require('../data/checklist.json'),

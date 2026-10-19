@@ -1,240 +1,272 @@
 {
- "days": {
-  "sun": {
-   "label": "Sunday",
-   "role": "Script day",
-   "short": "Script",
-   "blurb": "Write the full script and test every step on screen."
+  "days": {
+    "sun": {
+      "label": "Sunday",
+      "role": "Script day",
+      "short": "Script",
+      "blurb": "Write the full script and test every step on screen."
+    },
+    "mon": {
+      "label": "Monday",
+      "role": "Read-through",
+      "short": "Read",
+      "blurb": "Final read of the script and reply to comments."
+    },
+    "tue": {
+      "label": "Tuesday",
+      "role": "Record day",
+      "short": "Record",
+      "blurb": "Record the screen and your voice in Camtasia."
+    },
+    "wed": {
+      "label": "Wednesday",
+      "role": "Day off",
+      "short": "Rest",
+      "blurb": "No channel work. Rest keeps the habit going."
+    },
+    "thu": {
+      "label": "Thursday",
+      "role": "Edit day",
+      "short": "Edit",
+      "blurb": "Cut in Camtasia, clean audio in Audition, finish in CapCut, then upload."
+    },
+    "fri": {
+      "label": "Friday",
+      "role": "English version",
+      "short": "English",
+      "blurb": "Make the English version with a Google AI Studio voice, then research next week's video and prepare the Saturday post."
+    },
+    "sat": {
+      "label": "Saturday",
+      "role": "Publish day",
+      "short": "Publish",
+      "blurb": "The video goes live. Check it, share it, reply to comments."
+    }
   },
-  "mon": {
-   "label": "Monday",
-   "role": "Read-through",
-   "short": "Read",
-   "blurb": "Final read of the script and reply to comments."
-  },
-  "tue": {
-   "label": "Tuesday",
-   "role": "Record day",
-   "short": "Record",
-   "blurb": "Record the screen and your voice in Camtasia."
-  },
-  "wed": {
-   "label": "Wednesday",
-   "role": "Day off",
-   "short": "Rest",
-   "blurb": "No channel work. Rest keeps the habit going."
-  },
-  "thu": {
-   "label": "Thursday",
-   "role": "Edit day",
-   "short": "Edit",
-   "blurb": "Cut in Camtasia, clean audio in Audition, finish in CapCut, then upload."
-  },
-  "fri": {
-   "label": "Friday",
-   "role": "Brainstorm",
-   "short": "Brainstorm",
-   "blurb": "Research next week's video and prepare the Saturday post."
-  },
-  "sat": {
-   "label": "Saturday",
-   "role": "Publish day",
-   "short": "Publish",
-   "blurb": "The video goes live. Check it, share it, reply to comments."
-  }
- },
- "tasks": [
-  {
-   "id": "sun-write",
-   "day": "sun",
-   "minutes": 45,
-   "text": "SCRIPT DAY. Write the full script from your Thursday outline using the Script Template (or review a script drafted with AI and rewrite it in your own words). Short spoken sentences, one part at a time.",
-   "tool": "Google Docs",
-   "applies": "both"
-  },
-  {
-   "id": "sun-test",
-   "day": "sun",
-   "minutes": 30,
-   "text": "Test every step on screen exactly as you will show it (accounts, prompts, settings, downloads). Fix the script wherever a step fails or looks different.",
-   "tool": "Your computer",
-   "applies": "both"
-  },
-  {
-   "id": "sun-read",
-   "day": "sun",
-   "minutes": 15,
-   "text": "Read the script aloud once and mark where to pause, zoom or show a graphic.",
-   "tool": "Google Docs",
-   "applies": "both"
-  },
-  {
-   "id": "mon-comments",
-   "day": "mon",
-   "minutes": 15,
-   "text": "Reply to comments and pin a comment on the latest video that points to the next episode.",
-   "tool": "YouTube Studio (phone is fine)",
-   "applies": "both"
-  },
-  {
-   "id": "mon-read",
-   "day": "mon",
-   "minutes": 10,
-   "text": "Read the finished script once more and open it ready for Tuesday. Fix anything that felt unclear.",
-   "tool": "Google Docs",
-   "applies": "both"
-  },
-  {
-   "id": "tue-setup",
-   "day": "tue",
-   "minutes": 15,
-   "text": "Set up: phone on silent, close other apps, open the finished script, check the microphone level in Camtasia Recorder, zoom the browser to 125%.",
-   "tool": "Camtasia Recorder",
-   "applies": "both"
-  },
-  {
-   "id": "tue-rehearse",
-   "day": "tue",
-   "minutes": 30,
-   "text": "Rehearse the demo once without recording so the steps are smooth and nothing surprises you.",
-   "tool": "Your script",
-   "applies": "both"
-  },
-  {
-   "id": "tue-record-live",
-   "day": "tue",
-   "minutes": 90,
-   "text": "Record the screen and speak at the same time in Camtasia Recorder, one section per recording. Use the script as bullet points and speak in your own words. If you make a mistake, stop, stay silent for 2 seconds, then say the sentence again; the gap makes it easy to find and cut in the edit. Say the section name before you start.",
-   "tool": "Camtasia Recorder (screen + microphone)",
-   "applies": "live"
-  },
-  {
-   "id": "tue-record-screen",
-   "day": "tue",
-   "minutes": 60,
-   "text": "Record the screen only in Camtasia Recorder, one section per recording. Follow the script steps at a calm pace and pause 1 second before each click. You do not need to speak.",
-   "tool": "Camtasia Recorder (screen only)",
-   "applies": "voiceover"
-  },
-  {
-   "id": "tue-record-voice",
-   "day": "tue",
-   "minutes": 60,
-   "text": "Record the voice-over section by section while watching the screen recording, reading the script in your own words. Re-record any sentence you stumble on.",
-   "tool": "Camtasia voice narration or Adobe Audition",
-   "applies": "voiceover"
-  },
-  {
-   "id": "tue-review",
-   "day": "tue",
-   "minutes": 20,
-   "text": "Listen to the first 2 minutes: check volume, background noise and screen sharpness. Re-record anything bad now, not on Thursday.",
-   "tool": "Headphones",
-   "applies": "both"
-  },
-  {
-   "id": "tue-backup",
-   "day": "tue",
-   "minutes": 15,
-   "text": "Name files (W01_section01, W01_section02 ...), copy to the Drive backup folder, tick Recorded in the calendar.",
-   "tool": "Google Drive",
-   "applies": "both"
-  },
-  {
-   "id": "thu-roughcut",
-   "day": "thu",
-   "minutes": 60,
-   "text": "Camtasia rough cut: import the section recordings, cut mistakes and long pauses, speed up waiting moments, add zoom and cursor highlights, add chapter markers. Finish all the timing here; after this step do not cut the voice again.",
-   "tool": "Camtasia",
-   "applies": "both"
-  },
-  {
-   "id": "thu-vo-sync",
-   "day": "thu",
-   "minutes": 30,
-   "text": "Place the voice-over on the screen recording in Camtasia, sync it and trim the gaps.",
-   "tool": "Camtasia",
-   "applies": "voiceover"
-  },
-  {
-   "id": "thu-audition",
-   "day": "thu",
-   "minutes": 20,
-   "text": "Export the video and the voice (as an audio file) from Camtasia. In Adobe Audition remove noise, even out the volume, set the loudness and export a clean WAV.",
-   "tool": "Adobe Audition",
-   "applies": "both"
-  },
-  {
-   "id": "thu-capcut",
-   "day": "thu",
-   "minutes": 40,
-   "text": "CapCut final edit: put the clean audio under the Camtasia video (mute the video's own sound), then add intro and outro, quiet music, on-screen text and captions. Do not change the voice timing here.",
-   "tool": "CapCut",
-   "applies": "both"
-  },
-  {
-   "id": "thu-thumbnail",
-   "day": "thu",
-   "minutes": 30,
-   "text": "Thumbnail: use your Canva template, big readable text (3 to 5 words), one clear image.",
-   "tool": "Canva",
-   "applies": "both"
-  },
-  {
-   "id": "thu-title",
-   "day": "thu",
-   "minutes": 20,
-   "text": "Title (Amharic plus English keywords), description with chapters and practice files, playlist, end screen to next episode.",
-   "tool": "YouTube Studio",
-   "applies": "both"
-  },
-  {
-   "id": "thu-upload",
-   "day": "thu",
-   "minutes": 15,
-   "text": "Export from CapCut (1080p MP4), upload and schedule for Saturday. Tick Edited, Thumbnail and Uploaded in the calendar.",
-   "tool": "CapCut, YouTube Studio",
-   "applies": "both"
-  },
-  {
-   "id": "thu-outline",
-   "day": "thu",
-   "minutes": 45,
-   "text": "Outline next week's video with the Script Template: title, the promise to the viewer and 5 to 7 key points. The full script is written on Sunday.",
-   "tool": "Google Docs",
-   "applies": "both"
-  },
-  {
-   "id": "thu-check",
-   "day": "thu",
-   "minutes": 10,
-   "text": "Check last week's views and comments, write the number in the calendar, jot one lesson in Notes.",
-   "tool": "YouTube Studio",
-   "applies": "both"
-  },
-  {
-   "id": "fri-brainstorm",
-   "day": "fri",
-   "minutes": 30,
-   "text": "Brainstorm and research next week's video: examples, questions viewers asked, screenshots, links, and the prompts or settings you need to test.",
-   "tool": "Phone notes / Google Keep",
-   "applies": "both"
-  },
-  {
-   "id": "fri-post",
-   "day": "fri",
-   "minutes": 15,
-   "text": "Prepare the Saturday post: one Short or community post and message for your Telegram group or social pages.",
-   "tool": "Phone",
-   "applies": "both"
-  },
-  {
-   "id": "sat-live",
-   "day": "sat",
-   "minutes": 20,
-   "text": "Video goes live: confirm it published, watch the first minute, share the link, reply to early comments.",
-   "tool": "YouTube Studio",
-   "applies": "both"
-  }
- ]
+  "tasks": [
+    {
+      "id": "sun-write",
+      "day": "sun",
+      "minutes": 45,
+      "text": "SCRIPT DAY. Write the full script from your Thursday outline using the Script Template (or review a script drafted with AI and rewrite it in your own words). Short spoken sentences, one part at a time.",
+      "tool": "Google Docs",
+      "applies": "both"
+    },
+    {
+      "id": "sun-test",
+      "day": "sun",
+      "minutes": 30,
+      "text": "Test every step on screen exactly as you will show it (accounts, prompts, settings, downloads). Fix the script wherever a step fails or looks different.",
+      "tool": "Your computer",
+      "applies": "both"
+    },
+    {
+      "id": "sun-read",
+      "day": "sun",
+      "minutes": 15,
+      "text": "Read the script aloud once and mark where to pause, zoom or show a graphic.",
+      "tool": "Google Docs",
+      "applies": "both"
+    },
+    {
+      "id": "sun-en-text",
+      "day": "sun",
+      "minutes": 20,
+      "text": "English narration text: copy the English side of the script into a clean document for text to speech. Short sentences, spell out numbers and web addresses, write abbreviations the way they are spoken, and mark pauses with a new line.",
+      "tool": "Google Docs",
+      "applies": "both"
+    },
+    {
+      "id": "mon-comments",
+      "day": "mon",
+      "minutes": 15,
+      "text": "Reply to comments and pin a comment on the latest video that points to the next episode.",
+      "tool": "YouTube Studio (phone is fine)",
+      "applies": "both"
+    },
+    {
+      "id": "mon-read",
+      "day": "mon",
+      "minutes": 10,
+      "text": "Read the finished script once more and open it ready for Tuesday. Fix anything that felt unclear.",
+      "tool": "Google Docs",
+      "applies": "both"
+    },
+    {
+      "id": "tue-setup",
+      "day": "tue",
+      "minutes": 15,
+      "text": "Set up: phone on silent, close other apps, open the finished script, check the microphone level in Camtasia Recorder, zoom the browser to 125%.",
+      "tool": "Camtasia Recorder",
+      "applies": "both"
+    },
+    {
+      "id": "tue-rehearse",
+      "day": "tue",
+      "minutes": 30,
+      "text": "Rehearse the demo once without recording so the steps are smooth and nothing surprises you.",
+      "tool": "Your script",
+      "applies": "both"
+    },
+    {
+      "id": "tue-record-live",
+      "day": "tue",
+      "minutes": 90,
+      "text": "Record the screen and speak in Amharic at the same time in Camtasia Recorder, one section per recording. Use the script as bullet points and speak in your own words. If you make a mistake, stop, stay silent for 2 seconds, then say the sentence again; the gap makes it easy to find and cut in the edit. Say the section name before you start.",
+      "tool": "Camtasia Recorder (screen + microphone)",
+      "applies": "live"
+    },
+    {
+      "id": "tue-record-screen",
+      "day": "tue",
+      "minutes": 60,
+      "text": "Record the screen only in Camtasia Recorder, one section per recording. Follow the script steps at a calm pace and pause 1 second before each click. You do not need to speak.",
+      "tool": "Camtasia Recorder (screen only)",
+      "applies": "voiceover"
+    },
+    {
+      "id": "tue-record-voice",
+      "day": "tue",
+      "minutes": 60,
+      "text": "Record your Amharic voice-over section by section while watching the screen recording, reading the script in your own words. Re-record any sentence you stumble on.",
+      "tool": "Camtasia voice narration or Adobe Audition",
+      "applies": "voiceover"
+    },
+    {
+      "id": "tue-review",
+      "day": "tue",
+      "minutes": 20,
+      "text": "Listen to the first 2 minutes: check volume, background noise and screen sharpness. Re-record anything bad now, not on Thursday.",
+      "tool": "Headphones",
+      "applies": "both"
+    },
+    {
+      "id": "tue-backup",
+      "day": "tue",
+      "minutes": 15,
+      "text": "Name files (W01_section01, W01_section02 ...), copy to the Drive backup folder, tick Recorded in the calendar.",
+      "tool": "Google Drive",
+      "applies": "both"
+    },
+    {
+      "id": "thu-roughcut",
+      "day": "thu",
+      "minutes": 60,
+      "text": "Camtasia rough cut: import the section recordings, cut mistakes and long pauses, speed up waiting moments, add zoom and cursor highlights, add chapter markers. Finish all the timing here; after this step do not cut the voice again.",
+      "tool": "Camtasia",
+      "applies": "both"
+    },
+    {
+      "id": "thu-vo-sync",
+      "day": "thu",
+      "minutes": 30,
+      "text": "Place the voice-over on the screen recording in Camtasia, sync it and trim the gaps.",
+      "tool": "Camtasia",
+      "applies": "voiceover"
+    },
+    {
+      "id": "thu-audition",
+      "day": "thu",
+      "minutes": 20,
+      "text": "Export the video and the voice (as an audio file) from Camtasia. In Adobe Audition remove noise, even out the volume, set the loudness and export a clean WAV.",
+      "tool": "Adobe Audition",
+      "applies": "both"
+    },
+    {
+      "id": "thu-capcut",
+      "day": "thu",
+      "minutes": 40,
+      "text": "CapCut final edit: put the clean audio under the Camtasia video (mute the video's own sound), then add intro and outro, quiet music, on-screen text and captions. Do not change the voice timing here.",
+      "tool": "CapCut",
+      "applies": "both"
+    },
+    {
+      "id": "thu-thumbnail",
+      "day": "thu",
+      "minutes": 30,
+      "text": "Thumbnail: use your Canva template, big readable text (3 to 5 words), one clear image.",
+      "tool": "Canva",
+      "applies": "both"
+    },
+    {
+      "id": "thu-title",
+      "day": "thu",
+      "minutes": 20,
+      "text": "Title (Amharic plus English keywords), description with chapters and practice files, playlist, end screen to next episode.",
+      "tool": "YouTube Studio",
+      "applies": "both"
+    },
+    {
+      "id": "thu-upload",
+      "day": "thu",
+      "minutes": 15,
+      "text": "Export from CapCut (1080p MP4), upload and schedule for Saturday. Tick Edited, Thumbnail and Uploaded in the calendar.",
+      "tool": "CapCut, YouTube Studio",
+      "applies": "both"
+    },
+    {
+      "id": "thu-outline",
+      "day": "thu",
+      "minutes": 45,
+      "text": "Outline next week's video with the Script Template: title, the promise to the viewer and 5 to 7 key points. The full script is written on Sunday.",
+      "tool": "Google Docs",
+      "applies": "both"
+    },
+    {
+      "id": "thu-check",
+      "day": "thu",
+      "minutes": 10,
+      "text": "Check last week's views and comments, write the number in the calendar, jot one lesson in Notes.",
+      "tool": "YouTube Studio",
+      "applies": "both"
+    },
+    {
+      "id": "fri-en-tts",
+      "day": "fri",
+      "minutes": 30,
+      "text": "English voice: in Google AI Studio (text to speech) paste the English narration one section at a time, use the same voice and style as every other video, and download each audio file. Listen to every section and regenerate any word it mispronounces.",
+      "tool": "Google AI Studio (text to speech)",
+      "applies": "both"
+    },
+    {
+      "id": "fri-en-edit",
+      "day": "fri",
+      "minutes": 45,
+      "text": "English edit: duplicate the finished Thursday project, remove your Amharic voice, lay the English audio under the same screen recording, adjust the timing of each section, and change any on-screen text and captions to English. Export 1080p MP4.",
+      "tool": "Camtasia, CapCut",
+      "applies": "both"
+    },
+    {
+      "id": "fri-en-upload",
+      "day": "fri",
+      "minutes": 15,
+      "text": "English upload: upload the English version (or add it as a second audio track if your channel offers that), use an English title and description, reuse the thumbnail with English text, and schedule it for Saturday or Sunday.",
+      "tool": "YouTube Studio",
+      "applies": "both"
+    },
+    {
+      "id": "fri-brainstorm",
+      "day": "fri",
+      "minutes": 30,
+      "text": "Brainstorm and research next week's video: examples, questions viewers asked, screenshots, links, and the prompts or settings you need to test.",
+      "tool": "Phone notes / Google Keep",
+      "applies": "both"
+    },
+    {
+      "id": "fri-post",
+      "day": "fri",
+      "minutes": 15,
+      "text": "Prepare the Saturday post: one Short or community post and message for your Telegram group or social pages.",
+      "tool": "Phone",
+      "applies": "both"
+    },
+    {
+      "id": "sat-live",
+      "day": "sat",
+      "minutes": 20,
+      "text": "Video goes live: confirm it published, watch the first minute, share the link, reply to early comments.",
+      "tool": "YouTube Studio",
+      "applies": "both"
+    }
+  ]
 }

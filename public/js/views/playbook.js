@@ -2,7 +2,7 @@ import { h } from '../lib/dom.js';
 import { lsGet, lsSet } from '../lib/dom.js';
 import { state } from '../store.js';
 
-const SECTIONS = [['pipeline', 'Production pipeline'], ['mic', 'Mic test'], ['speaking', 'Speaking'], ['script', 'Script template'], ['rules', 'Rules'], ['tools', 'Tools']];
+const SECTIONS = [['pipeline', 'Production pipeline'], ['mic', 'Mic test'], ['speaking', 'Speaking'], ['script', 'Script template'], ['english', 'English version'], ['rules', 'Rules'], ['tools', 'Tools']];
 let section = lsGet('zx-playbook', 'pipeline');
 let ruleType = 'All';
 
@@ -21,6 +21,7 @@ export function renderPlaybook() {
     h('p', { class: 'muted' }, 'Every script has the same nine parts. Open a video and use its Script tab.'),
     h('div', null, state.templates.script.parts.map((p) => h('div', { class: 'rule' }, h('div', { class: 'row between' }, h('strong', null, p.title), h('span', { class: 'muted small' }, `about ${p.minutes} min`)), h('span', { class: 'muted' }, p.hint)))),
     pb.titlePattern ? h('p', { class: 'small' }, h('strong', null, pb.titlePattern.label + ': '), pb.titlePattern.text) : null);
+  else if (section === 'english') content = h('section', { class: 'panel stack' }, h('h2', null, 'Amharic and English versions'), steps(pb.english));
   else if (section === 'rules') {
     const types = ['All', ...new Set(pb.rules.map((r) => r.type))];
     content = h('section', { class: 'panel' },

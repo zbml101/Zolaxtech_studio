@@ -9,6 +9,7 @@ const PRIMARY = { settings: ['user_id'], google_connections: ['user_id'], routin
 
 function createFake() {
   const tables = { settings: [], videos: [], ideas: [], todos: [], routine_done: [], reviews: [], google_connections: [] };
+  const users = [];
   let tick = 0;
   const stamp = () => new Date(Date.now() + tick++).toISOString();
   const clone = (x) => JSON.parse(JSON.stringify(x));
@@ -40,8 +41,8 @@ function createFake() {
   }
 
   class Query {
-    constructor(table, uid) {
-      this.table = table; this.uid = uid; this.op = 'select'; this.filters = []; this.sort = null;
+    constructor(table, uid, bypass) {
+      this.table = table; this.uid = uid; this.bypass = bypass; this.op = 'select'; this.filters = []; this.sort = null;
       this.limitN = null; this.payload = null; this.returning = false; this.mode = 'many'; this.cols = '*'; this.opts = {};
     }
     select(cols = '*') { if (this.op === 'select') this.cols = cols; else { this.returning = true; this.cols = cols; } return this; }
@@ -75,9 +76,9 @@ function createFake() {
     }
 
     exec() {
-      if (!this.uid) return err('42501', 'not signed in');
+      if (!this.uid && !this.bypass) return err('42501', 'not signed in');
       const store = tables[this.table];
-      const mine = () => store.filter((r) => r.user_id === this.uid);
+      const mine = () => (this.bypass ? store.slice() : store.filter((r) => r.user_id === this.uid));
       const matching = () => mine().filter((r) => this.filters.every((f) => f(r)));
 
       if (this.op === 'select') {
@@ -162,14 +163,16 @@ function createFake() {
   function createClient(url, key, opts = {}) {
     const header = (opts.global && opts.global.headers && opts.global.headers.Authorization) || '';
     const user = userFor(header.replace(/^Bearer /i, ''));
+    const service = key === 'service-key';
     return {
       auth: {
+        admin: { async listUsers() { return { data: { users: users.map((e) => userFor(`test-token-${e}`)) }, error: null }; } },
         async getUser(token) {
           const u = userFor(token);
           return u ? { data: { user: u }, error: null } : { data: { user: null }, error: { message: 'invalid token' } };
         },
       },
-      from: (table) => new Query(table, user && user.id),
+      from: (table) => new Query(table, user && user.id, service),
       async rpc(name, args) {
         if (!user) return err('42501', 'not signed in');
         return rpcs[name](user.id, args);
@@ -177,7 +180,7 @@ function createFake() {
     };
   }
 
-  return { createClient, tables };
+  return { createClient, tables, users };
 }
 
 module.exports = { createFake };

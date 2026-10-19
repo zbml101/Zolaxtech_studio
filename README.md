@@ -1,7 +1,7 @@
 # ZolaxTech Studio
 
-A web app for running a weekly YouTube channel: a 41-video plan with dates that move when you move a video, a daily routine, a script editor with English and Amharic side by side, a teleprompter, a checklist per video, ideas, results and reviews.
-It is the web version of the Excel planner and starts with the same 41 videos, 61 ideas and weekly routine.
+A web app for running a weekly YouTube channel: a 42-video plan with dates that move when you move a video, a daily routine, a script editor with English and Amharic side by side, a teleprompter, a checklist per video, ideas, results and reviews.
+It is the web version of the Excel planner and starts with the same videos (plus the students video as week 3), 60 ideas and weekly routine.
 
 - **Supabase**: sign-in (email and password) and the database.
 - **SnapDeploy**: runs the small Node server (`server.js`) that serves the app and its API.
@@ -58,6 +58,15 @@ Good to know:
 - The Drive folder **ZolaxTech Studio** holds the Doc and Sheet files the app creates.
 - **Disconnect Google** revokes the app's access and deletes the stored token.
 - The Google refresh token is stored encrypted (AES-256-GCM) with `TOKEN_KEY`, which lives only in the SnapDeploy environment variables. Do not change `TOKEN_KEY` later, or press Connect Google again if you do.
+
+## Daily email (optional)
+
+Every morning the app emails each approved person today's role, tasks, video steps due today, and anything behind schedule. It uses Resend (free) to send and Vercel Cron to run once a day (03:00 UTC, about 06:00 in Ethiopia; change `schedule` in `vercel.json`).
+1. Run `db/schema.sql` again in Supabase (adds the on/off switch).
+2. At resend.com create a free account and an API key. Until you verify your own domain, Resend only delivers to the email you signed up with.
+3. In Supabase, **Project Settings > API Keys**, copy the **service_role / secret** key. Keep it private: it can read all rows, so it lives only in Vercel's environment variables and is used only by the daily run.
+4. In Vercel add: `RESEND_API_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `CRON_SECRET` (any long random text), and optionally `TIMEZONE` (default `Africa/Addis_Ababa`) and `MAIL_FROM`. Redeploy.
+5. In the app, **Settings > Daily email > Send me today's email now** to test. The On/Off switch there controls the daily run.
 
 ## Optional: host on Vercel instead (free, no card, never sleeps)
 

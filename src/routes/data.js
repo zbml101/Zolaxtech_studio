@@ -19,6 +19,7 @@ module.exports = function dataRoutes({ templates }) {
     },
     publish_offset: (x) => v.int(x, 'Publish day', { min: 1, max: 6 }),
     recording_method: (x) => v.oneOf(x, METHODS, 'Recording method'),
+    daily_email: (x) => v.bool(x, 'Daily email'),
   };
 
   router.patch('/settings', wrap(async (req, res) => {

@@ -31,6 +31,7 @@ export function openNewVideo(prefill = {}) {
         const body = { title: String(f.get('title')).trim(), series: String(f.get('series')).trim(), key_points: String(f.get('key_points')).trim() };
         if (!body.title || !body.series) return toast('Add a title and a series.', 'error');
         if (where === 'next' && next) body.position = next.position;
+        if (where === 'week') { const w = Number(f.get('week')); if (!Number.isInteger(w) || w < 1) return toast('Enter the week number, for example 3.', 'error'); body.position = w; }
         busy = true;
         try { const row = await addVideo(body); close(); go(row.id); } catch (err) { busy = false; toast(errorText(err), 'error'); }
       } },
@@ -40,7 +41,9 @@ export function openNewVideo(prefill = {}) {
         field('Key points', h('textarea', { name: 'key_points', maxlength: 2000, rows: 3, placeholder: 'What the viewer learns, in a few lines' }, prefill.key_points || '')),
         field('Where in the plan', h('select', { name: 'where' },
           h('option', { value: 'end' }, 'At the end of the plan'),
-          next ? h('option', { value: 'next' }, `Make it the next video (week ${next.position}; later videos move one week)`) : null)),
+          next ? h('option', { value: 'next' }, `Make it the next video (week ${next.position}; later videos move one week)`) : null,
+          h('option', { value: 'week' }, 'At a week number I choose (later videos move one week)'))),
+        field('Week number', h('input', { type: 'number', name: 'week', min: 1, max: 500, placeholder: 'Only used for "At a week number"' })),
         h('div', { class: 'row end gap' }, h('button', { type: 'button', class: 'btn ghost', onclick: close }, 'Cancel'), h('button', { type: 'submit', class: 'btn primary' }, 'Add video')));
       return form;
     },

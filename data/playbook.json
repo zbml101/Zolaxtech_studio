@@ -1,294 +1,307 @@
 {
- "pipeline": [
-  "1. Camtasia: import the section recordings, cut mistakes and silent gaps, speed up waiting moments, add zoom and cursor highlights, and set chapter markers. Finish all timing here.",
-  "2. Camtasia: export the finished video (MP4) and the voice as a separate audio file (WAV, or the best audio format your version offers) from the same timeline. If your version has no audio-only export, open the exported video in Audition instead.",
-  "3. Adobe Audition: remove background noise, even out the volume and set the loudness (about -14 LUFS is the usual level for YouTube). Export a clean WAV.",
-  "4. CapCut: import the Camtasia video and the clean audio, mute the video's own sound and line both up at the start. They have the same length, so they stay in sync.",
-  "5. CapCut: add the intro and outro, quiet background music, on-screen text and captions (test how well captions handle Amharic and fix the text by hand), and leave room for the end screen.",
-  "6. CapCut: export 1080p MP4 for YouTube. Rule: after the audio leaves Camtasia, never cut or move the voice in CapCut; if you must cut, cut video and audio together.",
-  "7. Save the Camtasia, Audition and CapCut project files in the video's folder so you can fix mistakes later."
- ],
- "mic": [
-  "1. Plug the microphone into a USB port, then open Windows Settings, System, Sound, Input and choose it.",
-  "2. In Camtasia Recorder choose the same microphone as the audio input. Speak normally and watch the level meter: it should move well into the upper-middle range and never hit the top.",
-  "3. Put headphones on (in the microphone's headset socket if it has one, so you hear yourself without delay) and record 30 seconds.",
-  "4. Play it back. Listen for room echo, fan or street noise, keyboard and mouse clicks, and popping on P and B sounds.",
-  "5. Fix one thing at a time: distance (10 to 15 cm), volume knob, echo/effect knobs to minimum, a folded cloth under the stand, a quieter room or time of day.",
-  "6. Keep the same position and knob settings every week so all your videos sound alike."
- ],
- "speaking": [
-  "Live narration: write the script as short spoken sentences, not paragraphs, and keep it on a second screen, a printout or your phone.",
-  "Say what you are about to click, then click. Pause 1 second before each click so viewers can follow.",
-  "Made a mistake? Stop, stay silent for 2 seconds, say the sentence again and carry on. Cut the gap when you edit.",
-  "Record each part (1 to 9) as its own file so a retake never costs you the whole video.",
-  "Separate voice-over: record the screen first, following the steps slowly, then record the voice section by section while watching the video.",
-  "With either method, use the same browser zoom (125%) every time so editing stays simple."
- ],
- "rules": [
-  {
-   "type": "Consistency",
-   "rule": "Treat Tuesday and Thursday as fixed appointments with yourself, never as free time to be used for something else.",
-   "why": "Habits form from fixed times, not from motivation."
-  },
-  {
-   "type": "Consistency",
-   "rule": "Publish on the same day and time every week (the plan uses Saturday). After 8 weeks, look at when viewers watch and adjust once.",
-   "why": "Viewers learn when to expect you."
-  },
-  {
-   "type": "Consistency",
-   "rule": "Build a buffer: aim to be 1 video ahead by week 4 and 2 videos ahead by week 8. The Start Here sheet shows your buffer.",
-   "why": "A sick week or a power cut will not break the streak."
-  },
-  {
-   "type": "Consistency",
-   "rule": "Ship at 80 percent. Set a maximum editing time (2 hours) and stop when it runs out.",
-   "why": "Perfectionism is the main reason channels stop."
-  },
-  {
-   "type": "Consistency",
-   "rule": "Sunday is script day: write and test the next video's script so Tuesday is only recording. If you miss Sunday, use Monday evening as the backup.",
-   "why": "Writing and recording on the same day is what makes weeks run late."
-  },
-  {
-   "type": "Consistency",
-   "rule": "Keep Wednesday free of channel work.",
-   "why": "Rest keeps the habit going for months."
-  },
-  {
-   "type": "Consistency",
-   "rule": "Make templates for everything: script, thumbnail, intro, description.",
-   "why": "Fewer decisions means faster weeks."
-  },
-  {
-   "type": "Consistency",
-   "rule": "On a busy week use the minimum version on the Weekly Routine sheet. Never skip the week.",
-   "why": "A smaller video on time beats none."
-  },
-  {
-   "type": "Consistency",
-   "rule": "Do not judge the channel by one video. Review every 4 weeks and keep the habit for at least 12 weeks before big changes.",
-   "why": "Growth after a long break comes slowly."
-  },
-  {
-   "type": "Content",
-   "rule": "Open with the result: show what the viewer will be able to do in the first 20 seconds.",
-   "why": "People leave when they do not see the benefit quickly."
-  },
-  {
-   "type": "Content",
-   "rule": "Put Amharic and English keywords in the title, for example: Gmail በአማርኛ | Gmail Tutorial in Amharic (Part 1).",
-   "why": "Viewers search in both languages."
-  },
-  {
-   "type": "Content",
-   "rule": "Use series with clear numbering and a playlist for each series. End every video by naming the next one.",
-   "why": "Series keep people watching more than one video."
-  },
-  {
-   "type": "Content",
-   "rule": "Add chapters in the description and zoom in on small parts of the screen. Use a large browser zoom while recording.",
-   "why": "Makes long tutorials easy to follow and revisit."
-  },
-  {
-   "type": "Content",
-   "rule": "Give a mini challenge and practice files so viewers can practice.",
-   "why": "Practice builds loyal viewers and comments."
-  },
-  {
-   "type": "Content",
-   "rule": "Test every step yourself before recording and fix your script if a step fails.",
-   "why": "Wrong steps lose trust faster than slow editing."
-  },
-  {
-   "type": "Audio",
-   "rule": "Clean voice matters more than a fancy picture. Record in a quiet room, keep the microphone close, and listen to the first 2 minutes before continuing.",
-   "why": "Viewers forgive simple visuals, not bad sound."
-  },
-  {
-   "type": "Recording",
-   "rule": "Live narration: speak in short sentences, pause 1 second before each click, and if you slip, stay silent for 2 seconds and repeat the sentence.",
-   "why": "The silent gap shows you exactly where to cut."
-  },
-  {
-   "type": "Recording",
-   "rule": "Try one recording method for at least 4 weeks before judging it. You can switch on the Start Here sheet if it is not working.",
-   "why": "Changing method every week costs more time than either method."
-  },
-  {
-   "type": "Editing",
-   "rule": "Cut in Camtasia first and lock the timing. After the audio goes to Audition and CapCut, only add things (music, text, intro); never cut the voice again.",
-   "why": "Cutting after the audio is cleaned makes the voice and the picture go out of sync."
-  },
-  {
-   "type": "Editing",
-   "rule": "Use the same CapCut intro, caption style and music level every week, and save the project files with the video.",
-   "why": "A consistent look builds your brand and saves time."
-  },
-  {
-   "type": "Reach",
-   "rule": "No video is guaranteed to go viral. Raise your chances: a topic many people already search for, one clear promise in the title, a thumbnail that is readable on a phone, and a strong first 30 seconds.",
-   "why": "Views come from clicks plus watch time."
-  },
-  {
-   "type": "Reach",
-   "rule": "Make videos people want to send to Telegram and WhatsApp groups: checklists, 'mistakes to avoid', before and after results, free templates.",
-   "why": "Shared links bring viewers from outside YouTube."
-  },
-  {
-   "type": "Reach",
-   "rule": "Use your IT support experience as proof: real problems, real fixes, real examples from daily work (without private company details).",
-   "why": "Real experience is the thing other channels cannot copy."
-  },
-  {
-   "type": "Reach",
-   "rule": "If a good video gets few clicks after a week, try a new thumbnail and title once (check whether YouTube Studio offers a thumbnail test for your channel).",
-   "why": "Small changes to the click-through rate can lift a strong video."
-  },
-  {
-   "type": "Growth",
-   "rule": "Cut 1 or 2 Shorts from each long video and share each episode in a Telegram group or other community where your audience already is.",
-   "why": "Brings new viewers to the long videos."
-  },
-  {
-   "type": "Growth",
-   "rule": "Reply to comments within 24 hours and turn repeated questions into future videos.",
-   "why": "Comments show you what people actually need."
-  },
-  {
-   "type": "Growth",
-   "rule": "Every 4 weeks write one line: what worked, what did not, what I change next month.",
-   "why": "Small corrections add up over 41 weeks."
-  }
- ],
- "tools": [
-  {
-   "purpose": "Schedule",
-   "main": "Google Calendar",
-   "alt": "Any phone calendar",
-   "how": "Import zolaxtech_schedule.ics: Tuesday, Thursday and Saturday are blocked every week. Turn on notifications on your phone."
-  },
-  {
-   "purpose": "Tracking",
-   "main": "This workbook in Google Sheets",
-   "alt": "Notion (free), Trello (free)",
-   "how": "Upload the .xlsx to Google Drive and open with Google Sheets to update from your phone."
-  },
-  {
-   "purpose": "Scripts and notes",
-   "main": "Google Docs",
-   "alt": "Google Keep for quick ideas",
-   "how": "One Doc per video, named W01_title, using the Script Template."
-  },
-  {
-   "purpose": "Backup",
-   "main": "Google Drive",
-   "alt": "External disk",
-   "how": "Keep recordings and project files in a folder per video (see structure below)."
-  },
-  {
-   "purpose": "Screen recording + audio",
-   "main": "Camtasia (Recorder)",
-   "alt": "OBS Studio",
-   "how": "Record each section as its own recording at 1080p with the microphone on. Test with a 10-second recording first and watch the audio level meter."
-  },
-  {
-   "purpose": "Microphone",
-   "main": "Jmary MC-PW12 USB microphone (yours)",
-   "alt": "Phone earphones with a mic (backup)",
-   "how": "Plug in by USB, choose it as the input in Windows and in Camtasia. Keep it 10 to 15 cm from your mouth at the same distance every time, set any echo or effect knob to minimum, and test before every session."
-  },
-  {
-   "purpose": "Voice-over (separate)",
-   "main": "Camtasia voice narration or Adobe Audition",
-   "alt": "Audacity or a phone voice recorder",
-   "how": "Only for the Separate voice-over method: record in a quiet room while watching the screen recording."
-  },
-  {
-   "purpose": "Rough cut",
-   "main": "Camtasia",
-   "alt": "DaVinci Resolve or Shotcut",
-   "how": "Cut mistakes and silences, add zoom, cursor highlights and chapter markers. All timing is finished here."
-  },
-  {
-   "purpose": "Audio clean-up",
-   "main": "Adobe Audition",
-   "alt": "Audacity",
-   "how": "Noise reduction, even volume, loudness. Export a clean WAV."
-  },
-  {
-   "purpose": "Final edit",
-   "main": "CapCut",
-   "alt": "DaVinci Resolve",
-   "how": "Intro and outro, quiet music, on-screen text and captions. Never change the voice timing here."
-  },
-  {
-   "purpose": "Cursor highlight / zoom",
-   "main": "Camtasia (built in)",
-   "alt": "ZoomIt",
-   "how": "Helps viewers follow tiny menus on screen."
-  },
-  {
-   "purpose": "Thumbnails",
-   "main": "Canva",
-   "alt": "Photopea",
-   "how": "Make one template and reuse it with a different image and 3 to 5 words each week."
-  },
-  {
-   "purpose": "Music and sound",
-   "main": "YouTube Audio Library",
-   "alt": "Free music sites with a clear license",
-   "how": "Soft background music only; keep your voice clear."
-  },
-  {
-   "purpose": "Keyword ideas",
-   "main": "YouTube search suggestions",
-   "alt": "Google Trends",
-   "how": "Type the topic in YouTube search and note what it suggests, in Amharic and English."
-  },
-  {
-   "purpose": "Analytics",
-   "main": "YouTube Studio",
-   "alt": "",
-   "how": "Check watch time and click rate every 4 weeks, not every day."
-  },
-  {
-   "purpose": "Coding series",
-   "main": "VS Code",
-   "alt": "XAMPP (PHP), Node.js, Git",
-   "how": "Install and test everything before recording the matching episode."
-  },
-  {
-   "purpose": "AI help",
-   "main": "ChatGPT, NotebookLM",
-   "alt": "Google Gemini",
-   "how": "Brainstorm outlines and check explanations. Always verify technical steps yourself before recording."
-  }
- ],
- "folders": [
-  "ZolaxTech / W01_ChatGPT_Beginners /",
-  "01_Script  |  02_Recordings  |  03_Camtasia  |  04_Audition  |  05_CapCut  |  06_Thumbnail  |  07_Final_Export"
- ],
- "titlePattern": [
-  {
-   "label": "Title pattern",
-   "text": "[Topic] በአማርኛ | [Topic] in Amharic, Part [n]  (keep the main keyword in both languages, people search in both)"
-  },
-  {
-   "label": "Description line 1",
-   "text": "In this video you will learn [outcome]. (the first line shows in search results)"
-  },
-  {
-   "label": "Chapters",
-   "text": "00:00 Intro, 00:40 What you need, 01:30 Step 1 ... (one line per section)"
-  },
-  {
-   "label": "Links",
-   "text": "Practice files, previous and next episode, playlist, your website zolaxtech.com.et"
-  },
-  {
-   "label": "Pinned comment",
-   "text": "Question for viewers + link to the next episode"
-  }
- ]
+  "pipeline": [
+    "1. Camtasia: import the section recordings, cut mistakes and silent gaps, speed up waiting moments, add zoom and cursor highlights, and set chapter markers. Finish all timing here.",
+    "2. Camtasia: export the finished video (MP4) and the voice as a separate audio file (WAV, or the best audio format your version offers) from the same timeline. If your version has no audio-only export, open the exported video in Audition instead.",
+    "3. Adobe Audition: remove background noise, even out the volume and set the loudness (about -14 LUFS is the usual level for YouTube). Export a clean WAV.",
+    "4. CapCut: import the Camtasia video and the clean audio, mute the video's own sound and line both up at the start. They have the same length, so they stay in sync.",
+    "5. CapCut: add the intro and outro, quiet background music, on-screen text and captions (test how well captions handle Amharic and fix the text by hand), and leave room for the end screen.",
+    "6. CapCut: export 1080p MP4 for YouTube. Rule: after the audio leaves Camtasia, never cut or move the voice in CapCut; if you must cut, cut video and audio together.",
+    "7. Save the Camtasia, Audition and CapCut project files in the video's folder so you can fix mistakes later."
+  ],
+  "mic": [
+    "1. Plug the microphone into a USB port, then open Windows Settings, System, Sound, Input and choose it.",
+    "2. In Camtasia Recorder choose the same microphone as the audio input. Speak normally and watch the level meter: it should move well into the upper-middle range and never hit the top.",
+    "3. Put headphones on (in the microphone's headset socket if it has one, so you hear yourself without delay) and record 30 seconds.",
+    "4. Play it back. Listen for room echo, fan or street noise, keyboard and mouse clicks, and popping on P and B sounds.",
+    "5. Fix one thing at a time: distance (10 to 15 cm), volume knob, echo/effect knobs to minimum, a folded cloth under the stand, a quieter room or time of day.",
+    "6. Keep the same position and knob settings every week so all your videos sound alike."
+  ],
+  "speaking": [
+    "Live narration: write the script as short spoken sentences, not paragraphs, and keep it on a second screen, a printout or your phone.",
+    "Say what you are about to click, then click. Pause 1 second before each click so viewers can follow.",
+    "Made a mistake? Stop, stay silent for 2 seconds, say the sentence again and carry on. Cut the gap when you edit.",
+    "Record each part (1 to 9) as its own file so a retake never costs you the whole video.",
+    "Separate voice-over: record the screen first, following the steps slowly, then record the voice section by section while watching the video.",
+    "With either method, use the same browser zoom (125%) every time so editing stays simple."
+  ],
+  "rules": [
+    {
+      "type": "Consistency",
+      "rule": "Treat Tuesday and Thursday as fixed appointments with yourself, never as free time to be used for something else.",
+      "why": "Habits form from fixed times, not from motivation."
+    },
+    {
+      "type": "Consistency",
+      "rule": "Publish on the same day and time every week (the plan uses Saturday). After 8 weeks, look at when viewers watch and adjust once.",
+      "why": "Viewers learn when to expect you."
+    },
+    {
+      "type": "Consistency",
+      "rule": "Build a buffer: aim to be 1 video ahead by week 4 and 2 videos ahead by week 8. The Start Here sheet shows your buffer.",
+      "why": "A sick week or a power cut will not break the streak."
+    },
+    {
+      "type": "Consistency",
+      "rule": "Ship at 80 percent. Set a maximum editing time (2 hours) and stop when it runs out.",
+      "why": "Perfectionism is the main reason channels stop."
+    },
+    {
+      "type": "Consistency",
+      "rule": "Sunday is script day: write and test the next video's script so Tuesday is only recording. If you miss Sunday, use Monday evening as the backup.",
+      "why": "Writing and recording on the same day is what makes weeks run late."
+    },
+    {
+      "type": "Consistency",
+      "rule": "Keep Wednesday free of channel work.",
+      "why": "Rest keeps the habit going for months."
+    },
+    {
+      "type": "Consistency",
+      "rule": "Make templates for everything: script, thumbnail, intro, description.",
+      "why": "Fewer decisions means faster weeks."
+    },
+    {
+      "type": "Consistency",
+      "rule": "On a busy week use the minimum version on the Weekly Routine sheet. Never skip the week.",
+      "why": "A smaller video on time beats none."
+    },
+    {
+      "type": "Consistency",
+      "rule": "Do not judge the channel by one video. Review every 4 weeks and keep the habit for at least 12 weeks before big changes.",
+      "why": "Growth after a long break comes slowly."
+    },
+    {
+      "type": "Content",
+      "rule": "Open with the result: show what the viewer will be able to do in the first 20 seconds.",
+      "why": "People leave when they do not see the benefit quickly."
+    },
+    {
+      "type": "Content",
+      "rule": "Put Amharic and English keywords in the title, for example: Gmail በአማርኛ | Gmail Tutorial in Amharic (Part 1).",
+      "why": "Viewers search in both languages."
+    },
+    {
+      "type": "Content",
+      "rule": "Use series with clear numbering and a playlist for each series. End every video by naming the next one.",
+      "why": "Series keep people watching more than one video."
+    },
+    {
+      "type": "Content",
+      "rule": "Add chapters in the description and zoom in on small parts of the screen. Use a large browser zoom while recording.",
+      "why": "Makes long tutorials easy to follow and revisit."
+    },
+    {
+      "type": "Content",
+      "rule": "Give a mini challenge and practice files so viewers can practice.",
+      "why": "Practice builds loyal viewers and comments."
+    },
+    {
+      "type": "Content",
+      "rule": "Test every step yourself before recording and fix your script if a step fails.",
+      "why": "Wrong steps lose trust faster than slow editing."
+    },
+    {
+      "type": "Audio",
+      "rule": "Clean voice matters more than a fancy picture. Record in a quiet room, keep the microphone close, and listen to the first 2 minutes before continuing.",
+      "why": "Viewers forgive simple visuals, not bad sound."
+    },
+    {
+      "type": "Recording",
+      "rule": "Live narration: speak in short sentences, pause 1 second before each click, and if you slip, stay silent for 2 seconds and repeat the sentence.",
+      "why": "The silent gap shows you exactly where to cut."
+    },
+    {
+      "type": "Recording",
+      "rule": "Try one recording method for at least 4 weeks before judging it. You can switch on the Start Here sheet if it is not working.",
+      "why": "Changing method every week costs more time than either method."
+    },
+    {
+      "type": "Editing",
+      "rule": "Cut in Camtasia first and lock the timing. After the audio goes to Audition and CapCut, only add things (music, text, intro); never cut the voice again.",
+      "why": "Cutting after the audio is cleaned makes the voice and the picture go out of sync."
+    },
+    {
+      "type": "Editing",
+      "rule": "Use the same CapCut intro, caption style and music level every week, and save the project files with the video.",
+      "why": "A consistent look builds your brand and saves time."
+    },
+    {
+      "type": "Reach",
+      "rule": "No video is guaranteed to go viral. Raise your chances: a topic many people already search for, one clear promise in the title, a thumbnail that is readable on a phone, and a strong first 30 seconds.",
+      "why": "Views come from clicks plus watch time."
+    },
+    {
+      "type": "Reach",
+      "rule": "Make videos people want to send to Telegram and WhatsApp groups: checklists, 'mistakes to avoid', before and after results, free templates.",
+      "why": "Shared links bring viewers from outside YouTube."
+    },
+    {
+      "type": "Reach",
+      "rule": "Use your IT support experience as proof: real problems, real fixes, real examples from daily work (without private company details).",
+      "why": "Real experience is the thing other channels cannot copy."
+    },
+    {
+      "type": "Reach",
+      "rule": "If a good video gets few clicks after a week, try a new thumbnail and title once (check whether YouTube Studio offers a thumbnail test for your channel).",
+      "why": "Small changes to the click-through rate can lift a strong video."
+    },
+    {
+      "type": "Growth",
+      "rule": "Cut 1 or 2 Shorts from each long video and share each episode in a Telegram group or other community where your audience already is.",
+      "why": "Brings new viewers to the long videos."
+    },
+    {
+      "type": "Growth",
+      "rule": "Reply to comments within 24 hours and turn repeated questions into future videos.",
+      "why": "Comments show you what people actually need."
+    },
+    {
+      "type": "Growth",
+      "rule": "Every 4 weeks write one line: what worked, what did not, what I change next month.",
+      "why": "Small corrections add up over 41 weeks."
+    }
+  ],
+  "tools": [
+    {
+      "purpose": "Schedule",
+      "main": "Google Calendar",
+      "alt": "Any phone calendar",
+      "how": "Import zolaxtech_schedule.ics: Tuesday, Thursday and Saturday are blocked every week. Turn on notifications on your phone."
+    },
+    {
+      "purpose": "Tracking",
+      "main": "This workbook in Google Sheets",
+      "alt": "Notion (free), Trello (free)",
+      "how": "Upload the .xlsx to Google Drive and open with Google Sheets to update from your phone."
+    },
+    {
+      "purpose": "Scripts and notes",
+      "main": "Google Docs",
+      "alt": "Google Keep for quick ideas",
+      "how": "One Doc per video, named W01_title, using the Script Template."
+    },
+    {
+      "purpose": "Backup",
+      "main": "Google Drive",
+      "alt": "External disk",
+      "how": "Keep recordings and project files in a folder per video (see structure below)."
+    },
+    {
+      "purpose": "Screen recording + audio",
+      "main": "Camtasia (Recorder)",
+      "alt": "OBS Studio",
+      "how": "Record each section as its own recording at 1080p with the microphone on. Test with a 10-second recording first and watch the audio level meter."
+    },
+    {
+      "purpose": "Microphone",
+      "main": "Jmary MC-PW12 USB microphone (yours)",
+      "alt": "Phone earphones with a mic (backup)",
+      "how": "Plug in by USB, choose it as the input in Windows and in Camtasia. Keep it 10 to 15 cm from your mouth at the same distance every time, set any echo or effect knob to minimum, and test before every session."
+    },
+    {
+      "purpose": "Voice-over (separate)",
+      "main": "Camtasia voice narration or Adobe Audition",
+      "alt": "Audacity or a phone voice recorder",
+      "how": "Only for the Separate voice-over method: record in a quiet room while watching the screen recording."
+    },
+    {
+      "purpose": "Rough cut",
+      "main": "Camtasia",
+      "alt": "DaVinci Resolve or Shotcut",
+      "how": "Cut mistakes and silences, add zoom, cursor highlights and chapter markers. All timing is finished here."
+    },
+    {
+      "purpose": "Audio clean-up",
+      "main": "Adobe Audition",
+      "alt": "Audacity",
+      "how": "Noise reduction, even volume, loudness. Export a clean WAV."
+    },
+    {
+      "purpose": "Final edit",
+      "main": "CapCut",
+      "alt": "DaVinci Resolve",
+      "how": "Intro and outro, quiet music, on-screen text and captions. Never change the voice timing here."
+    },
+    {
+      "purpose": "Cursor highlight / zoom",
+      "main": "Camtasia (built in)",
+      "alt": "ZoomIt",
+      "how": "Helps viewers follow tiny menus on screen."
+    },
+    {
+      "purpose": "Thumbnails",
+      "main": "Canva",
+      "alt": "Photopea",
+      "how": "Make one template and reuse it with a different image and 3 to 5 words each week."
+    },
+    {
+      "purpose": "Music and sound",
+      "main": "YouTube Audio Library",
+      "alt": "Free music sites with a clear license",
+      "how": "Soft background music only; keep your voice clear."
+    },
+    {
+      "purpose": "Keyword ideas",
+      "main": "YouTube search suggestions",
+      "alt": "Google Trends",
+      "how": "Type the topic in YouTube search and note what it suggests, in Amharic and English."
+    },
+    {
+      "purpose": "Analytics",
+      "main": "YouTube Studio",
+      "alt": "",
+      "how": "Check watch time and click rate every 4 weeks, not every day."
+    },
+    {
+      "purpose": "Coding series",
+      "main": "VS Code",
+      "alt": "XAMPP (PHP), Node.js, Git",
+      "how": "Install and test everything before recording the matching episode."
+    },
+    {
+      "purpose": "AI help",
+      "main": "ChatGPT, NotebookLM",
+      "alt": "Google Gemini",
+      "how": "Brainstorm outlines and check explanations. Always verify technical steps yourself before recording."
+    },
+    {
+      "purpose": "English voice",
+      "main": "Google AI Studio (text to speech)",
+      "alt": "Any other text-to-speech voice you like",
+      "how": "Paste the English text one section at a time, keep the same voice for every video, download and listen to each part."
+    }
+  ],
+  "folders": [
+    "ZolaxTech / W01_ChatGPT_Beginners /",
+    "01_Script  |  02_Recordings  |  03_Camtasia  |  04_Audition  |  05_CapCut  |  06_Thumbnail  |  07_Final_Export"
+  ],
+  "titlePattern": [
+    {
+      "label": "Title pattern",
+      "text": "[Topic] በአማርኛ | [Topic] in Amharic, Part [n]  (keep the main keyword in both languages, people search in both)"
+    },
+    {
+      "label": "Description line 1",
+      "text": "In this video you will learn [outcome]. (the first line shows in search results)"
+    },
+    {
+      "label": "Chapters",
+      "text": "00:00 Intro, 00:40 What you need, 01:30 Step 1 ... (one line per section)"
+    },
+    {
+      "label": "Links",
+      "text": "Practice files, previous and next episode, playlist, your website zolaxtech.com.et"
+    },
+    {
+      "label": "Pinned comment",
+      "text": "Question for viewers + link to the next episode"
+    }
+  ],
+  "english": [
+    "Every video has two versions. The Amharic version is your own voice, recorded on Tuesday. The English version uses a voice made in Google AI Studio (text to speech).",
+    "Sunday: after the script is finished, copy the English side into a clean text document. Short sentences, numbers and web addresses spelled out, one new line wherever a pause belongs.",
+    "Friday: paste the text into Google AI Studio one section at a time, choose one voice and keep it for every video so the channel sounds consistent, download each section, and listen to all of it. Regenerate any section with a wrong word.",
+    "Friday: duplicate the finished Camtasia project, swap your Amharic voice for the English audio, fix the timing, and change on-screen text and captions to English. Export a 1080p MP4.",
+    "Upload with an English title and description. Keep the English version separate from the Amharic one so viewers can find it by language."
+  ]
 }

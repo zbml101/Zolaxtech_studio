@@ -9,12 +9,16 @@ const rateLimit = require('express-rate-limit');
 const { HttpError } = require('./lib/http');
 const { authMiddleware } = require('./auth');
 const { loadTemplates } = require('./seed');
+const { createMailer } = require('./lib/mail');
+const { emailRoutes, cronRoute } = require('./routes/email');
 const { createGoogle } = require('./lib/google');
 const { STAGES, IDEA_FORMATS, PRIORITIES } = require('./constants');
 
-function createApp({ createClient, config, supabaseBrowserBundle, google: googleOptions = {} }) {
+function createApp({ createClient, config, supabaseBrowserBundle, google: googleOptions = {}, mailer: mailerOverride }) {
   const google = createGoogle({ config: config.google || {}, fetchImpl: googleOptions.fetchImpl });
   const templates = loadTemplates();
+  const mailer = mailerOverride || createMailer({ apiKey: config.resendKey, from: config.mailFrom || 'ZolaxTech Studio <onboarding@resend.dev>' });
+  config.timezone = config.timezone || 'Africa/Addis_Ababa';
   const app = express();
   const isProd = process.env.NODE_ENV === 'production';
 
@@ -58,7 +62,7 @@ function createApp({ createClient, config, supabaseBrowserBundle, google: google
 
   api.get('/health', (req, res) => res.json({ ok: true, time: new Date().toISOString() }));
   // These two values are meant to be public: the browser needs them to sign in with Supabase.
-  api.get('/config', (req, res) => res.json({ supabaseUrl: config.supabaseUrl, supabaseAnonKey: config.supabaseAnonKey, googleEnabled: google.enabled, restricted: Boolean(config.allowedEmails && config.allowedEmails.length) }));
+  api.get('/config', (req, res) => res.json({ supabaseUrl: config.supabaseUrl, supabaseAnonKey: config.supabaseAnonKey, googleEnabled: google.enabled, emailEnabled: mailer.enabled, restricted: Boolean(config.allowedEmails && config.allowedEmails.length) }));
   // Open /api/diagnose in the browser to see, without signing in, whether the server is set up correctly.
   api.get('/diagnose', async (req, res) => {
     const out = { node: process.version, env: { SUPABASE_URL: Boolean(config.supabaseUrl), SUPABASE_ANON_KEY: Boolean(config.supabaseAnonKey), PUBLIC_URL: Boolean(config.publicUrl), approvedEmails: (config.allowedEmails || []).length, google: google.enabled },
@@ -86,11 +90,13 @@ function createApp({ createClient, config, supabaseBrowserBundle, google: google
     res.json({ ...templates, stages: STAGES, ideaFormats: IDEA_FORMATS, priorities: PRIORITIES });
   });
 
+  api.use(cronRoute({ createClient, config, templates, mailer })); // scheduled run: has its own secret, no sign-in
   api.use(authMiddleware({ createClient, config }));
   api.use(require('./routes/state')());
   api.use(require('./routes/videos')());
   api.use(require('./routes/data')({ templates }));
   api.use(require('./routes/exports')());
+  api.use(emailRoutes({ templates, config, mailer }));
   api.use(require('./routes/google')({ google, templates, config }));
   api.use((req, res) => res.status(404).json({ error: 'That address does not exist.' }));
   app.use('/api', api);
