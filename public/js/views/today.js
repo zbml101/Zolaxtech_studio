@@ -6,6 +6,7 @@ import { seriesColor } from '../lib/constants.js';
 import { addDays, sundayOf, niceLong, nice, weekday } from '../lib/dates.js';
 import { state, DAY_KEYS, tasksFor, videoForWeek, weekProgress, dayProgress, saveSettings, addTodo, patchTodo, deleteTodo, datesOf } from '../store.js';
 import { rundown, taskRow } from './shared.js';
+import { openFocus } from './focus.js';
 
 // ---------------------------------------------------------------- focus timer (keeps running while you move between screens)
 const timer = { total: 25 * 60, left: 25 * 60, running: false, id: null };
@@ -99,7 +100,7 @@ export function renderToday(param, rerender) {
       h('div', { class: 'stack-l' },
         h('section', { class: 'panel', 'aria-label': `${info.label} routine` },
           h('div', { class: 'panel-h' }, h('div', null, h('h2', null, `${info.label}: ${info.role}`), h('p', { class: 'muted small' }, info.blurb)),
-            list.length ? h('span', { class: 'pill' }, `${minutes} min`) : null),
+            h('div', { class: 'row gap-s' }, list.length ? h('span', { class: 'pill' }, `${minutes} min`) : null, list.length && date === state.today ? h('button', { class: 'btn sm primary', onclick: openFocus }, icon('play'), 'Focus mode') : null)),
           vid && ['sun', 'mon', 'tue', 'thu'].includes(key) ? h('a', { class: 'row gap-s small', href: `#/video/${vid.id}`, style: { textDecoration: 'none', marginBottom: '10px' } },
             h('span', { class: 'muted' }, `Week ${vid.position}:`), h('strong', null, vid.title)) : null,
           list.length ? h('div', null, list.map((t) => taskRow(t, week)))

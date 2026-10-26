@@ -6,7 +6,7 @@ import { state, addIdea, patchIdea, deleteIdea, promoteIdea, nextUp } from '../s
 
 let q = '', series = 'All', fmtF = 'All', prio = 'All', hideUsed = true;
 
-function openAdd() {
+export function openAdd() {
   const all = [...new Set([...state.ideas.map((i) => i.series), ...state.videos.map((v) => v.series)])];
   modal({ title: 'New idea', content: (close) => h('form', { class: 'stack', onsubmit: async (e) => {
     e.preventDefault();

@@ -54,7 +54,7 @@ function createApp({ createClient, config, supabaseBrowserBundle, google: google
     }),
   );
   app.use(compression());
-  app.use(express.json({ limit: '1mb' }));
+  app.use((req, res, next) => (req.path === '/api/restore' ? next() : express.json({ limit: '1mb' })(req, res, next)));
 
   // ---------------------------------------------------------------- API
   const api = express.Router();
@@ -96,6 +96,7 @@ function createApp({ createClient, config, supabaseBrowserBundle, google: google
   api.use(require('./routes/videos')());
   api.use(require('./routes/data')({ templates }));
   api.use(require('./routes/exports')());
+  api.use(require('./routes/restore')());
   api.use(emailRoutes({ templates, config, mailer }));
   api.use(require('./routes/google')({ google, templates, config }));
   api.use((req, res) => res.status(404).json({ error: 'That address does not exist.' }));

@@ -36,5 +36,23 @@ module.exports = function exportRoutes() {
     res.send(csv);
   }));
 
+  // Everything this person owns, in one file (settings, videos with scripts and checklists, ideas, tasks, ticks, reviews).
+  router.get('/export/backup.json', wrap(async (req, res) => {
+    const get = async (table, order) => {
+      let q = req.db.from(table).select('*');
+      if (order) q = q.order(order, { ascending: true });
+      return check(await q, `back up ${table}`);
+    };
+    const [videos, ideas, todos, routine_done, reviews] = await Promise.all([get('videos', 'position'), get('ideas', 'created_at'), get('todos', 'created_at'), get('routine_done'), get('reviews')]);
+    const settings = check(await req.db.from('settings').select('*').maybeSingle(), 'back up settings');
+    if (settings) delete settings.google_sheet_id; // tied to this Google account, not part of your content
+    res.set({
+      'Content-Type': 'application/json; charset=utf-8',
+      'Content-Disposition': `attachment; filename="zolaxtech-backup-${new Date().toISOString().slice(0, 10)}.json"`,
+      'Cache-Control': 'no-store',
+    });
+    res.send(JSON.stringify({ app: 'ZolaxTech Studio', version: 1, exported_at: new Date().toISOString(), email: req.user.email, settings, videos, ideas, todos, routine_done, reviews }, null, 2));
+  }));
+
   return router;
 };

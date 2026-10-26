@@ -121,6 +121,8 @@ npm test                 # API tests
 Dates are never stored. They are calculated from a video's week number, the first recording Tuesday and the publish day, so moving a video moves every date after it, like the spreadsheet.
 
 ## Handy things
+- **Focus mode** (press `f`, or the Focus button on Today): full-screen run through today's open tasks, one at a time, each with its own countdown. **Streak and badges** on the dashboard. Press `i` to save an idea from anywhere and `?` for all shortcuts.
+- **Full backup** (Settings > Export): one JSON file with everything you own. Keep a copy monthly.
 
 - `Ctrl K` (or `⌘K`) opens search and quick actions.
 - Teleprompter: Space starts and pauses, Up and Down change the speed, Esc closes.
@@ -137,3 +139,5 @@ data/                the starting plan, ideas, routine, checklist and playbook
 public/              the web app (HTML, CSS, JavaScript modules)
 test/                API tests and an in-memory Supabase for local trials
 ```
+
+**Restore from backup** (Settings > Export): pick a backup .json and the app fills in only what is missing: empty scripts and notes on videos with the same title, and ideas, to-dos and reviews you do not have. It never overwrites or deletes what is there now.

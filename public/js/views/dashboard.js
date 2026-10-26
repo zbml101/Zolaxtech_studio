@@ -8,6 +8,8 @@ import { state, datesOf, isOverdue, nextUp, isPublished, setStage, saveSettings,
 import { rundown, taskRow, stageBar } from './shared.js';
 import { openNewVideo } from './pipeline.js';
 import { journeyPanel } from './journey.js';
+import { streakPanel } from './streak.js';
+import { openFocus } from './focus.js';
 
 const greeting = () => { const hr = new Date().getHours(); return hr < 12 ? 'Good morning' : hr < 18 ? 'Good afternoon' : 'Good evening'; };
 
@@ -63,7 +65,7 @@ function todayPanel() {
   const week = sundayOf(state.today);
   const list = tasksFor(key);
   return h('section', { class: 'panel', 'aria-label': 'Today' },
-    h('div', { class: 'panel-h' }, h('h2', null, `Today · ${info.role}`), h('a', { class: 'btn ghost sm', href: '#/today' }, 'Open')),
+    h('div', { class: 'panel-h' }, h('h2', null, `Today · ${info.role}`), h('div', { class: 'row gap-s' }, list.length ? h('button', { class: 'btn sm', onclick: openFocus }, icon('play'), 'Focus') : null, h('a', { class: 'btn ghost sm', href: '#/today' }, 'Open'))),
     list.length ? h('div', null, list.map((t) => taskRow(t, week)))
       : h('p', { class: 'muted' }, key === 'wed' ? 'No channel work today. Rest keeps the habit going.' : 'Nothing scheduled today.'));
 }
@@ -114,6 +116,7 @@ export function renderDashboard() {
       h('div', null, h('dt', null, 'Average views, first 7 days'), h('dd', null, avg == null ? '–' : h('span', { 'data-count': avg, 'data-key': 'avg' }, avg.toLocaleString()))),
       h('div', null, h('dt', null, 'Plan ends'), h('dd', null, last ? nice(datesOf(last).publish) : '–'))),
     journeyPanel(),
+    streakPanel(),
     h('div', { class: 'cols' },
       h('div', { class: 'stack-l' }, nextUpPanel(v), upcomingPanel(v && v.id)),
       h('div', { class: 'stack-l' }, todayPanel(), seriesPanel())));

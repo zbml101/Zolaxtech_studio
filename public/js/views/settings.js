@@ -3,7 +3,7 @@ import { icon } from '../lib/icons.js';
 import { field, toast, errorText } from '../lib/ui.js';
 import { PUBLISH_DAYS } from '../lib/constants.js';
 import { weekday, nice, addDays } from '../lib/dates.js';
-import { state, saveSettings, connectGoogle, disconnectGoogle, syncCalendar, exportSheet } from '../store.js';
+import { state, refresh, saveSettings, connectGoogle, disconnectGoogle, syncCalendar, exportSheet } from '../store.js';
 import { confirmDialog } from '../lib/ui.js';
 import { download, api } from '../api.js';
 import { signOut } from '../auth.js';
@@ -101,8 +101,29 @@ export function renderSettings(rerender) {
           h('p', { class: 'muted small' }, 'The calendar file has four all-day events per video: script, record, edit and publish. Import it into Google Calendar.'),
           h('div', { class: 'row gap wrap' },
             h('button', { class: 'btn', onclick: () => exp('/export/calendar.ics', 'zolaxtech-schedule.ics') }, icon('download'), 'Calendar (.ics)'),
-            h('button', { class: 'btn', onclick: () => exp('/export/videos.csv', 'zolaxtech-videos.csv') }, icon('download'), 'Videos (.csv)'))),
+            h('button', { class: 'btn', onclick: () => exp('/export/videos.csv', 'zolaxtech-videos.csv') }, icon('download'), 'Videos (.csv)')),
+          h('p', { class: 'muted small' }, 'A full backup holds everything: settings, every video with its script and checklist, ideas, tasks, ticks and reviews. Keep a copy somewhere safe, for example once a month.'),
+          h('div', { class: 'row gap wrap' },
+            h('button', { class: 'btn primary', onclick: () => exp('/export/backup.json', `zolaxtech-backup-${state.today}.json`) }, icon('download'), 'Full backup (.json)'),
+            h('button', { class: 'btn', onclick: () => restoreBackup(rerender) }, icon('upload'), 'Restore from backup')),
+          h('p', { class: 'muted small' }, 'Restoring is safe: it only fills in what is missing (empty scripts and notes, missing ideas, to-dos and reviews). It never overwrites or deletes anything you have now.')),
         h('section', { class: 'panel stack' }, h('h2', null, 'Account'),
           h('p', { class: 'muted small' }, `Signed in as ${state.email}.`),
           h('div', null, h('button', { class: 'btn danger', onclick: () => signOut() }, icon('logout'), 'Sign out'))))));
+}
+
+function restoreBackup(rerender) {
+  const input = h('input', { type: 'file', accept: '.json,application/json' });
+  input.addEventListener('change', async () => {
+    const file = input.files && input.files[0];
+    if (!file) return;
+    try {
+      const data = JSON.parse(await file.text());
+      const r = await api.post('/restore', data);
+      const total = r.videos_filled + r.ideas_added + r.todos_added + r.reviews_added;
+      toast(total ? `Restored: ${r.videos_filled} videos filled in, ${r.ideas_added} ideas, ${r.todos_added} to-dos, ${r.reviews_added} reviews added.` : 'Nothing to restore: everything in that file is already here.', 'success');
+      if (total) { await refresh(); rerender(); }
+    } catch (e) { toast(e instanceof SyntaxError ? 'That file is not a valid backup.' : errorText(e), 'error'); }
+  });
+  input.click();
 }

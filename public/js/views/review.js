@@ -5,25 +5,7 @@ import { sum } from '../lib/format.js';
 import { state, saveReview, isPublished } from '../store.js';
 import { nice } from '../lib/dates.js';
 import { datesOf } from '../store.js';
-
-function viewsChart(videos) {
-  const data = videos.filter((v) => isPublished(v) && v.views_7d != null);
-  if (!data.length) return emptyState('No results yet', 'Open a published video, go to Results and add its views after 7 days.');
-  const W = 720, H = 240, L = 44, B = 28, T = 12;
-  const max = Math.max(10, ...data.map((v) => v.views_7d));
-  const nice10 = Math.pow(10, Math.floor(Math.log10(max)));
-  const top = Math.ceil(max / nice10) * nice10;
-  const bw = Math.min(46, (W - L) / data.length - 10);
-  const x = (i) => L + ((W - L) / data.length) * i + ((W - L) / data.length - bw) / 2;
-  const y = (n) => T + (H - T - B) * (1 - n / top);
-  const ticks = [0, 0.5, 1].map((f) => Math.round(top * f));
-  return s('svg', { class: 'chart', viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': `Views in the first 7 days for ${data.length} videos` },
-    ticks.map((t) => [s('line', { class: 'grid', x1: L, x2: W, y1: y(t), y2: y(t) }), s('text', { x: L - 8, y: y(t) + 4, 'text-anchor': 'end' }, t.toLocaleString())]),
-    data.map((v, i) => [
-      s('rect', { class: 'barv', x: x(i), y: y(v.views_7d), width: bw, height: Math.max(2, y(0) - y(v.views_7d)), rx: 4, style: `fill:${seriesColor(v.series)}` }, s('title', null, `Week ${v.position}: ${v.title}, ${v.views_7d.toLocaleString()} views`)),
-      s('text', { x: x(i) + bw / 2, y: H - 8, 'text-anchor': 'middle' }, `W${v.position}`),
-      bw > 26 ? s('text', { x: x(i) + bw / 2, y: y(v.views_7d) - 5, 'text-anchor': 'middle' }, v.views_7d.toLocaleString()) : null]));
-}
+import { viewsChart } from './viewschart.js';
 
 function blockPanel(block, videos) {
   const slice = videos.slice((block - 1) * 4, block * 4);
@@ -55,6 +37,6 @@ export function renderReview() {
   panels.reverse();
   return h('div', { class: 'stack-l' },
     h('div', { class: 'page-head' }, h('div', null, h('h1', null, 'Review'), h('p', null, 'Look back every four videos: keep what works, change one thing.'))),
-    h('section', { class: 'panel' }, h('div', { class: 'panel-h' }, h('h2', null, 'Views in the first 7 days')), viewsChart(state.videos)),
+    h('section', { class: 'panel' }, h('div', { class: 'panel-h' }, h('h2', null, 'Views in the first 7 days')), viewsChart(state.videos, () => window.__rerender())),
     panels.map((b) => blockPanel(b, state.videos)));
 }

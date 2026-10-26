@@ -3,6 +3,8 @@ import { icon } from './lib/icons.js';
 import { toast, errorText, modal } from './lib/ui.js';
 import './lib/fx.js';
 import { openNewVideo } from './views/pipeline.js';
+import { openFocus } from './views/focus.js';
+import { openAdd as openNewIdea } from './views/ideas.js';
 import { initAuth, getSession, onAuth, isRecovering, accessToken, signOut } from './auth.js';
 import { setTokenProvider, setSignedOutHandler } from './api.js';
 import { state, subscribe, load, reset, isOverdue, finishGoogleConnect } from './store.js';
@@ -208,7 +210,7 @@ document.addEventListener('keydown', (e) => {
 const GO = { d: '', t: 'today', p: 'pipeline', i: 'ideas', b: 'playbook', r: 'review', s: 'settings' };
 let gWait = 0;
 function showShortcuts() {
-  const rows = [['g d', 'Dashboard'], ['g t', 'Today'], ['g p', 'Pipeline'], ['g i', 'Ideas'], ['g b', 'Playbook'], ['g r', 'Review'], ['g s', 'Settings'], ['n', 'New video'], ['Ctrl K', 'Search everything'], ['?', 'This list']];
+  const rows = [['g d', 'Dashboard'], ['g t', 'Today'], ['g p', 'Pipeline'], ['g i', 'Ideas'], ['g b', 'Playbook'], ['g r', 'Review'], ['g s', 'Settings'], ['n', 'New video'], ['i', 'Save an idea'], ['f', 'Focus mode (today\'s tasks)'], ['Ctrl K', 'Search everything'], ['?', 'This list']];
   modal({ title: 'Keyboard shortcuts', content: () => h('div', { class: 'shortcuts' }, rows.map(([k, t]) => h('div', null, h('span', null, k.split(' ').map((x) => h('span', { class: 'kbd' }, x))), h('span', { class: 'muted' }, t)))) });
 }
 document.addEventListener('keydown', (e) => {
@@ -224,6 +226,8 @@ document.addEventListener('keydown', (e) => {
   }
   if (e.key === 'g') { gWait = setTimeout(() => { gWait = 0; }, 900); return; }
   if (e.key === 'n') { e.preventDefault(); openNewVideo(); }
+  else if (e.key === 'i') { e.preventDefault(); openNewIdea(); }
+  else if (e.key === 'f') { e.preventDefault(); openFocus(); }
   else if (e.key === '?') { e.preventDefault(); showShortcuts(); }
 });
 

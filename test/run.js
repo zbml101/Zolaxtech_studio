@@ -173,6 +173,36 @@ async function test(name, fn) {
     assert.strictEqual(r.json.first_record_day, '2026-10-20');
   });
 
+  await test('full backup includes scripts, ideas, tasks and the owner only', async () => {
+    const r = await call('GET', '/api/export/backup.json', { raw: true });
+    assert.strictEqual(r.status, 200);
+    assert.match(r.headers.get('content-disposition'), /zolaxtech-backup-\d{4}-\d{2}-\d{2}\.json/);
+    const b = JSON.parse(r.text);
+    assert.strictEqual(b.app, 'ZolaxTech Studio'); assert.ok(b.videos.length >= 42 && 'script' in b.videos[0] && 'checklist' in b.videos[0]);
+    assert.ok(Array.isArray(b.ideas) && Array.isArray(b.todos) && b.settings && !('google_sheet_id' in b.settings));
+  });
+
+  await test('restore only fills gaps and never overwrites', async () => {
+    const b = JSON.parse((await call('GET', '/api/export/backup.json', { raw: true })).text);
+    const vid = b.videos[5];
+    const live = await call('GET', '/api/videos/' + vid.id);
+    assert.ok(live.json);
+    await call('PATCH', '/api/videos/' + vid.id, { body: { script: { hook: { en: 'MINE', am: '' } } } });
+    const file = { ...b, videos: [{ title: vid.title, script: { hook: { en: 'OLD', am: 'አማርኛ' }, intro: { en: 'Intro', am: '' } }, notes: 'old notes' }],
+      ideas: [{ idea: 'Brand new restored idea', series: 'Other', format: 'long', priority: 'medium', why: 'x' }, b.ideas[0]],
+      todos: [{ title: 'Restored todo', done: false }], reviews: [{ block: 7, worked: 'w', change_next: 'c' }] };
+    const r = await call('POST', '/api/restore', { body: file });
+    assert.strictEqual(r.status, 200, JSON.stringify(r.json));
+    assert.strictEqual(r.json.videos_filled, 1); assert.strictEqual(r.json.ideas_added, 1);
+    assert.strictEqual(r.json.todos_added, 1); assert.strictEqual(r.json.reviews_added, 1);
+    const after = (await call('GET', '/api/videos/' + vid.id)).json;
+    assert.strictEqual(after.script.hook.en, 'MINE', 'your own text is never replaced');
+    assert.strictEqual(after.script.hook.am, 'አማርኛ'); assert.strictEqual(after.script.intro.en, 'Intro'); assert.strictEqual(after.notes, 'old notes');
+    const again = await call('POST', '/api/restore', { body: file });
+    assert.deepStrictEqual([again.json.videos_filled, again.json.ideas_added, again.json.todos_added, again.json.reviews_added], [0, 0, 0, 0]);
+    assert.strictEqual((await call('POST', '/api/restore', { body: { hello: 1 } })).status, 400);
+  });
+
   await test('exports: calendar and CSV', async () => {
     const ics = await call('GET', '/api/export/calendar.ics', { raw: true });
     assert.match(ics.headers.get('content-type'), /text\/calendar/);
