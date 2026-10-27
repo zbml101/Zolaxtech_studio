@@ -74,7 +74,15 @@ function createGoogle({ config = {}, fetchImpl = fetch } = {}) {
   async function exchangeCode(code, redirectUri) {
     const t = await call('POST', 'https://oauth2.googleapis.com/token', {
       form: { code, client_id: config.clientId, client_secret: config.clientSecret, redirect_uri: redirectUri, grant_type: 'authorization_code' },
-    }).catch((e) => { throw new HttpError(400, 'Google did not accept that sign-in. Start the connection again.'); });
+    }).catch((e) => {
+      const code = e.google && e.google.data && typeof e.google.data.error === 'string' ? e.google.data.error : '';
+      const hints = {
+        invalid_client: 'The Google client ID or secret on the server is wrong. Check GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET (no spaces, copied from the same OAuth client), then redeploy.',
+        redirect_uri_mismatch: `The redirect address does not match. In Google Cloud, add exactly ${redirectUri} under Authorized redirect URIs.`,
+        invalid_grant: 'That sign-in code was already used or expired. Press Connect Google once and finish it without reloading the page.',
+      };
+      throw new HttpError(400, `Google did not accept that sign-in${code ? ` (${code})` : ''}. ${hints[code] || 'Start the connection again.'}`);
+    });
     const granted = String(t.scope || '').split(' ');
     const missing = REQUIRED.filter((s) => !granted.includes(s));
     if (missing.length) throw new HttpError(400, 'Allow both Calendar and Drive access on the Google screen, then try again.');
